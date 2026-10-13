@@ -128,6 +128,7 @@ h1{margin:0;font-family:var(--display);font-weight:700;font-size:clamp(2rem,3.6v
 .badge{position:absolute;left:10px;top:10px;padding:4px 10px;border-radius:99px;font-size:12px;font-weight:600;background:var(--surface);border:1px solid var(--line)}
 .badge.inl{position:static;display:inline-block}
 .b-review{color:var(--warn)}.b-rejected{color:var(--bad)}.b-draft{color:var(--muted)}.b-published{color:var(--ok)}
+.badge.star{left:auto;right:10px;color:var(--warn)}
 .meta{padding:12px 8px 6px;display:flex;flex-direction:column;gap:9px;flex:1}
 .title{display:block;padding:0;border:0;background:none;text-align:left;font-family:var(--display);font-weight:600;font-size:17px;line-height:1.2;letter-spacing:-.01em;color:var(--text)}
 .row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
@@ -149,7 +150,6 @@ h1{margin:0;font-family:var(--display);font-weight:700;font-size:clamp(2rem,3.6v
 .stat-i{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--muted)}
 .stat-i .i{width:16px;height:16px}
 .foot .save{margin-left:auto}
-.modbar{display:flex;gap:8px}.modbar .btn{flex:1}
 .empty{grid-column:1/-1;text-align:center;padding:60px 20px;border-radius:22px;border:1px dashed var(--line);background:var(--surface)}
 .empty h3{margin:0 0 6px;font-family:var(--display);font-size:22px}
 .empty p{margin:0 0 18px;color:var(--muted)}
@@ -399,12 +399,6 @@ dialog::after{border-radius:26px}
 .cfoot.np{padding-top:10px}
 .cfoot.np .title{flex:1;min-width:0;font-size:15px}
 .card .reason{margin:8px 4px 0}
-.card .modbar{margin:10px 4px 0;flex-wrap:wrap}
-.card .modbar .btn{flex:1 1 auto;padding:8px 10px;font-size:13px}
-.selbox{position:absolute;left:10px;top:10px;z-index:4;width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:var(--dlg-a);border:1px solid var(--line);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
-.selbox input{width:16px;height:16px;accent-color:var(--accent);cursor:pointer;margin:0}
-.thumb .selbox~.badge{left:46px}
-.badge.star{left:auto;right:10px;color:var(--warn)}
 
 /* ===== PÁGINA DO COMPONENTE E EDITOR ===== */
 .epage{width:100%;max-width:1700px;margin:0 auto;padding:28px}
@@ -432,44 +426,6 @@ dialog::after{border-radius:26px}
 .pbar .sp{flex:1}
 .pbar.ef{align-items:flex-start}
 .pbar.ef .pend{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-left:auto}
-
-/* ===== ADMINISTRAÇÃO ===== */
-.admtools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
-.admtools .search{max-width:420px}
-.sel{height:42px;padding:0 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);outline:0;font-size:14.5px}
-.admbulk{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:16px;padding:10px 14px;border-radius:18px;border:1px solid var(--line);background:linear-gradient(135deg,var(--glass-a),var(--glass-b));box-shadow:inset 0 1px 1px var(--glass-hi)}
-.admbulk b{font-size:14px;margin-right:auto}
-.rows{display:flex;flex-direction:column;gap:10px;padding-bottom:60px}
-.rw{display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:18px;border:1px solid var(--line);background:linear-gradient(135deg,var(--glass-a),var(--glass-b));box-shadow:inset 0 1px 1px var(--glass-hi),0 8px 22px -16px var(--gshadow)}
-.rw .av{width:40px;height:40px;font-size:15px}
-.rw .rt{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.35}
-.rw .rt b{font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.rw .rt small{color:var(--muted);font-size:13px}
-.rw .rt q{font-size:13.5px;color:var(--muted);quotes:none;white-space:pre-wrap;overflow-wrap:anywhere}
-.rw .rn{display:flex;gap:6px;flex-wrap:wrap}
-.rw.click{cursor:pointer}
-.rw.click:hover{border-color:var(--accent)}
-.thread{margin-top:18px;padding:18px;border-radius:22px;border:1px solid var(--line);background:linear-gradient(135deg,var(--glass-a),var(--glass-b));-webkit-backdrop-filter:blur(26px) saturate(185%);backdrop-filter:blur(26px) saturate(185%);box-shadow:inset 0 1px 1px var(--glass-hi),0 18px 40px -20px var(--gshadow)}
-.thread h3{margin:0 0 4px;font-family:var(--display);font-size:20px}
-.tlist{display:flex;flex-direction:column;gap:12px;margin:14px 0}
-.tmsg{display:flex;gap:12px}
-.tmsg .av{width:34px;height:34px;font-size:13px}
-.tmsg .tb{flex:1;min-width:0;padding:10px 14px;border-radius:16px;background:var(--surface2);border:1px solid var(--line)}
-.tmsg.int .tb{border-style:dashed;border-color:var(--warn)}
-.tmsg .th{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13.5px}
-.tmsg .th small{color:var(--muted)}
-.tmsg p{margin:4px 0 0;white-space:pre-wrap;overflow-wrap:anywhere;font-size:14.5px}
-.tform{display:flex;flex-direction:column;gap:10px}
-.tform textarea{width:100%;min-height:76px;padding:11px 14px;border-radius:14px;border:1px solid var(--line);background:var(--surface);outline:0;resize:vertical;font:15px/1.5 var(--body)}
-.tform textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--tint)}
-.tform .trow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end}
-.chk{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);margin-right:auto}
-.chk input{accent-color:var(--accent);width:16px;height:16px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips .tagc{font:500 12.5px var(--body);padding:5px 11px}
-
-/* login da administração (/adm) */
-.admlogin{max-width:380px;margin:22px auto 0;text-align:left}
 
 /* ===== MOBILE ===== */
 .mnav,.catbar{display:none}
@@ -517,7 +473,6 @@ dialog::after{border-radius:26px}
   .bgs{flex-wrap:wrap}
   pre{height:240px}
   .type-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .rw{flex-wrap:wrap}
 }
 @media (max-width:600px){
   .grid,.grid[data-size]{grid-template-columns:minmax(0,1fr);gap:22px 14px}
@@ -541,7 +496,6 @@ dialog::after{border-radius:26px}
     <nav class="navlist" id="myNav">
       <button class="nv" type="button" data-view="list"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12v17l-6-4-6 4z"/></svg>Minha lista<em id="cntList"></em></button>
       <button class="nv" type="button" data-view="profile"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>Meu perfil</button>
-      <button class="nv" type="button" data-view="adm" id="navMod" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>Administração<em id="cntMod"></em></button>
     </nav>
     <p class="sec">Hashtags</p>
     <div class="tagcloud" id="tagCloud"></div>
@@ -630,28 +584,6 @@ dialog::after{border-radius:26px}
         <div class="grid" id="pGrid" data-size="mix"></div>
       </section>
 
-      <!-- Administração (/adm) -->
-      <section id="s_adm" aria-label="Administração" hidden>
-        <div class="shead"><div><h2>Administração</h2><p class="hint">Aprove, comente, recuse e gerencie a comunidade.</p></div></div>
-        <div class="empty" id="admGate" hidden></div>
-        <div id="admBody" hidden>
-          <div class="stats" id="admStats" style="padding-left:0;padding-right:0"></div>
-          <div class="ptabs" id="admTabs" role="tablist"></div>
-          <div class="admtools">
-            <label class="search"><span class="sr">Filtrar</span><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="admQ" type="search" placeholder="Filtrar por título, autor ou #hashtag" autocomplete="off"></label>
-            <select class="sel" id="admSort" aria-label="Ordenar">
-              <option value="new">Mais recentes</option>
-              <option value="old">Mais antigos</option>
-              <option value="likes">Mais curtidos</option>
-            </select>
-            <button class="btn ghost sm" id="admOut" type="button" style="margin-left:auto">Sair da administração</button>
-          </div>
-          <div class="admbulk" id="admBulk" hidden></div>
-          <div class="grid" id="admGrid" data-size="mix"></div>
-          <div class="rows" id="admRows" hidden></div>
-        </div>
-      </section>
-
       <!-- Componente -->
       <section id="s_component" aria-label="Componente" hidden>
         <div class="ptop">
@@ -693,24 +625,7 @@ dialog::after{border-radius:26px}
           <button class="btn ghost sm" id="vDl" type="button"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Baixar .html</button>
           <span class="sp"></span>
           <button class="btn ghost sm" id="vEdit" type="button" hidden>Editar</button>
-          <button class="btn ok sm" id="vApprove" type="button" hidden>Aprovar</button>
-          <button class="btn warn sm" id="vChanges" type="button" hidden>Pedir ajustes</button>
-          <button class="btn danger sm" id="vReject" type="button" hidden>Rejeitar</button>
-          <button class="btn ghost sm" id="vFeature" type="button" hidden>Destacar</button>
-          <button class="btn ghost sm" id="vUnpub" type="button" hidden>Despublicar</button>
           <button class="btn danger sm" id="vDel" type="button" hidden>Excluir</button>
-        </div>
-        <div class="thread" id="vThread" hidden>
-          <h3>Comentários e feedback</h3>
-          <p class="hint" id="vThreadHint"></p>
-          <div class="tlist" id="vThreadList"></div>
-          <form class="tform" id="vThreadForm">
-            <textarea id="vThreadText" maxlength="500" placeholder="Escreva um comentário…" aria-label="Comentário"></textarea>
-            <div class="trow">
-              <label class="chk" id="vThreadIntL" hidden><input type="checkbox" id="vThreadInt"> Nota interna (o autor não vê)</label>
-              <button class="btn sm" type="submit">Enviar comentário</button>
-            </div>
-          </form>
         </div>
       </section>
 
@@ -848,26 +763,6 @@ dialog::after{border-radius:26px}
   </div>
 </dialog>
 
-<!-- revisão (administração) -->
-<dialog id="revDlg" aria-labelledby="rvTitle">
-  <div class="dlg edit">
-    <div class="dh">
-      <div><h2 id="rvTitle">Revisar</h2><p class="hint" id="rvSub" style="margin-top:6px"></p></div>
-      <button class="btn ghost iconbtn x" id="rvClose" type="button" aria-label="Fechar"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-    </div>
-    <form class="colform" id="revForm" novalidate>
-      <p class="lbl">Respostas rápidas</p>
-      <div class="chips" id="rvQuick"></div>
-      <label class="f">Mensagem para o autor<textarea id="rvText" class="plain" maxlength="500" placeholder="Explique o que o autor pode melhorar…"></textarea></label>
-      <p class="err" id="rvErr" role="alert"></p>
-      <div class="acts" style="justify-content:flex-end">
-        <button class="btn ghost" id="rvCancel" type="button">Cancelar</button>
-        <button class="btn" id="rvOk" type="submit">Confirmar</button>
-      </div>
-    </form>
-  </div>
-</dialog>
-
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script type="module">
@@ -875,15 +770,6 @@ import{initializeApp}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-ap
 import{getAnalytics,isSupported}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-analytics.js";
 import{getAuth,onAuthStateChanged,signOut,GoogleAuthProvider,GithubAuthProvider,signInWithPopup,createUserWithEmailAndPassword,signInWithEmailAndPassword,sendPasswordResetEmail,updateProfile}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 import{getFirestore,collection,doc,getDoc,getDocs,setDoc,addDoc,updateDoc,deleteDoc,onSnapshot,query,where,limit,writeBatch}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-
-/* ===== CONFIGURAÇÃO =====
-   ADMIN_EMAILS: o e-mail do administrador. Só ele acessa /adm (login por e-mail e senha) e só ele
-   passa pelas regras do Firestore (arquivo firestore.rules).
-   >>> TROQUE PELO SEU E-MAIL e use o MESMO e-mail (minúsculo) no firestore.rules. <<<
-   Se a lista ficar vazia, a moderação fica desligada (tudo vai direto para "Publicados") e /adm fica indisponível. */
-const ADMIN_EMAILS=['SEU_EMAIL_AQUI@gmail.com'];
-const ADMINS=ADMIN_EMAILS.map(e=>String(e).toLowerCase());
-const MOD=ADMINS.length>0;
 
 const firebaseConfig={
   apiKey:"AIzaSyCbxXcDoSmmvMlCGIAsyRV2AvxMBKxx-bE",
@@ -924,7 +810,6 @@ const P={
 };
 const TYPES=['Botões','Caixas de seleção','Interruptores','Cartões','Carregadores','Inputs','Botões de rádio','Formulários','Padrões','Tooltips','Kits de interface'];
 const CATS=['Todos'].concat(TYPES);
-/* Grupo por tipo (usado só nas abas por tipo). Em "Todos", perfil, lista e administração todos os cards têm a mesma proporção. */
 const TYPE_SIZE={'Botões':'s','Caixas de seleção':'s','Interruptores':'s','Carregadores':'s','Inputs':'s','Botões de rádio':'s','Tooltips':'s','Cartões':'l','Formulários':'l','Padrões':'l','Kits de interface':'l'};
 const LEGACY={Toggles:'Interruptores',Checkboxes:'Caixas de seleção',Cards:'Cartões',Loaders:'Carregadores',Outros:'Kits de interface'};
 const sizeOf=cat=>TYPE_SIZE[cat]||'l';
@@ -940,20 +825,18 @@ const state={view:'explore',q:'',cat:'Todos',tag:'',sort:'pop',
   views:[],viewCount:{},seen:{},
   saves:{},saveT:{},saveCount:{},
   mineAll:[],
-  admAll:[],admLoaded:false,admTab:'queue',admQ:'',admSort:'new',sel:{},admUsers:null,log:[],thread:[],
   pview:null,pitems:[],ptab:'published',profileOwn:false,
   current:null,tab:'html',bg:'dark',editing:null,signupName:null};
-const caches={ex:{},ls:{},pf:{},md:{}};
-const unsubs={saves:null,mine:null,adm:null,log:null};
+const caches={ex:{},ls:{},pf:{}};
+const unsubs={saves:null,mine:null};
 const sessionSeen={};
 
 const statusOf=c=>c.status||'published';
 const stLabel=c=>{const s=statusOf(c);return s==='rejected'&&c.rejectKind==='changes'?'Ajustes pedidos':STATUS[s]};
 const byNew=(a,b)=>(b.createdAt||0)-(a.createdAt||0);
-/* admin = e-mail da lista + login por e-mail/senha (mesma condição das regras do Firestore) */
-const isAdmin=()=>!!state.user&&ADMINS.indexOf((state.user.email||'').toLowerCase())>-1&&(state.user.providerData||[]).some(p=>p.providerId==='password');
+
 function findItem(id){
-  const lists=[state.items,state.mineAll,state.pitems,state.admAll];
+  const lists=[state.items,state.mineAll,state.pitems];
   for(let i=0;i<lists.length;i++){const f=lists[i].filter(x=>x.id===id)[0];if(f)return f}
 }
 const uName=(uid,fb)=>{const u=state.users[uid];return(u&&u.displayName)||fb||'Anônimo'};
@@ -1014,9 +897,7 @@ function fullDoc(c){
 const slug=s=>String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')||'componente';
 const CATSLUG={};CATS.forEach(c=>{CATSLUG[slug(c)]=c});
 
-/* ---------- miniaturas: prévia INTEIRA dentro do card (zoom-out), sem cortar ----------
-   O iframe é montado numa área "virtual" (largura mínima VW) e reduzido com transform:scale
-   para caber exatamente no card. Assim todos os cards têm o mesmo tamanho e nada fica cortado. */
+/* ---------- miniaturas: prévia INTEIRA dentro do card (zoom-out), sem cortar ---------- */
 const VW=520;
 function fitThumb(t){
   const f=t.querySelector('iframe');if(!f)return;
@@ -1050,14 +931,12 @@ function copyText(t){
   if(navigator.clipboard&&navigator.clipboard.writeText)return navigator.clipboard.writeText(t).then(()=>true,()=>fallback());
   return Promise.resolve(fallback());
 }
-const typeDlg=$('#typeDlg'),authDlg=$('#authDlg'),editDlg=$('#editDlg'),revDlg=$('#revDlg'),shareView=$('#shareView');
+const typeDlg=$('#typeDlg'),authDlg=$('#authDlg'),editDlg=$('#editDlg'),shareView=$('#shareView');
 function syncLock(){document.body.classList.toggle('lock',!!document.querySelector('dialog[open]'))}
 document.addEventListener('close',syncLock,true);
 const scrollTop=()=>window.scrollTo({top:0,behavior:'instant'});
 
-/* ---------- ROTAS (URLs de verdade) ----------
-   /todos  /botoes  /interruptores ...  /hashtag/<tag>  /lista  /perfil  /perfil/<id>  /componente/<id>  /adm  /adm/<aba>
-   Requer o vercel.json (rewrite para /index.html). */
+/* ---------- ROTAS (URLs de verdade) ---------- */
 const DEF_B={view:'explore',cat:'Todos',tag:'',q:'',pv:null,pt:'published',cid:null,at:'queue'};
 function urlFor(b){
   let p='/todos';const qs=[],me=state.user&&state.user.uid;
@@ -1068,7 +947,6 @@ function urlFor(b){
   }else if(b.view==='list')p='/lista';
   else if(b.view==='profile'){p=(b.pv&&b.pv!==me)?'/perfil/'+encodeURIComponent(b.pv):'/perfil';if(b.pt&&b.pt!=='published')qs.push('aba='+b.pt)}
   else if(b.view==='component'&&b.cid)p='/componente/'+encodeURIComponent(b.cid);
-  else if(b.view==='adm')p='/adm'+(b.at&&b.at!=='queue'?'/'+b.at:'');
   return p+(qs.length?'?'+qs.join('&'):'');
 }
 function parseLoc(){
@@ -1078,7 +956,6 @@ function parseLoc(){
   if(s0==='lista')b.view='list';
   else if(s0==='perfil'){b.view='profile';b.pv=segs[1]||'me';b.pt=sp.get('aba')||'published'}
   else if(s0==='componente'&&segs[1]){b.view='component';b.cid=segs[1]}
-  else if(s0==='adm'){b.view='adm';b.at=segs[1]||'queue'}
   else if(s0==='hashtag'&&segs[1])b.tag=segs[1];
   else if(CATSLUG[s0])b.cat=CATSLUG[s0];
   return b;
@@ -1086,12 +963,12 @@ function parseLoc(){
 
 /* ---------- navegação: botão "voltar" do celular e do navegador ---------- */
 const NAV={popping:false};
-const snapBase=()=>({view:state.view,cat:state.cat,tag:state.tag,q:state.q,pv:state.pview,pt:state.ptab,cid:(state.view==='component'&&state.current)?state.current.id:null,at:state.admTab});
+const snapBase=()=>({view:state.view,cat:state.cat,tag:state.tag,q:state.q,pv:state.pview,pt:state.ptab,cid:(state.view==='component'&&state.current)?state.current.id:null});
 const hs=()=>{const s=history.state;return s&&s.nx?s:null};
 const curL=()=>{const s=hs();return s&&Array.isArray(s.L)?s.L.slice():[]};
 const topLayer=()=>{const L=curL();return L[L.length-1]};
 function layerOpen(n){
-  return n==='auth'?authDlg.open:n==='edit'?editDlg.open:n==='type'?typeDlg.open:n==='review'?revDlg.open:n==='editor'?!shareView.hidden:n==='drawer'?$('#side').classList.contains('open'):false;
+  return n==='auth'?authDlg.open:n==='edit'?editDlg.open:n==='type'?typeDlg.open:n==='editor'?!shareView.hidden:n==='drawer'?$('#side').classList.contains('open'):false;
 }
 function navPut(L,mode){
   const cur=hs(),n=mode==='push'?(cur?(cur.n||0)+1:1):(cur?(cur.n||0):0),b=snapBase();
@@ -1106,7 +983,7 @@ function layerClosed(name){
   if(NAV.popping)return;
   if(topLayer()===name){try{history.back()}catch(e){}}
 }
-[['type',typeDlg],['auth',authDlg],['edit',editDlg],['review',revDlg]].forEach(a=>a[1].addEventListener('close',()=>layerClosed(a[0])));
+[['type',typeDlg],['auth',authDlg],['edit',editDlg]].forEach(a=>a[1].addEventListener('close',()=>layerClosed(a[0])));
 function goBack(){const s=hs();if(s&&(s.n||0)>0)history.back();else showView('explore')}
 function commitView(y){
   if(NAV.popping)return;
@@ -1123,7 +1000,7 @@ function commitView(y){
   }catch(e){}
 }
 function restoreBase(b){
-  state.cat=b.cat||'Todos';state.tag=b.tag||'';state.q=b.q||'';$('#q').value=state.q;state.admTab=b.at||'queue';
+  state.cat=b.cat||'Todos';state.tag=b.tag||'';state.q=b.q||'';$('#q').value=state.q;
   if(b.view==='profile'&&b.pv){openProfile(b.pv,b.pt,true);return}
   if(b.view==='component'&&b.cid){const c=findItem(b.cid);if(c){openView(c,true);return}showView('explore',true);return}
   if(b.view==='list'&&!state.user&&state.authReady){showView('list',true);return}
@@ -1137,7 +1014,6 @@ window.addEventListener('popstate',e=>{
     if(!L.includes('auth')&&authDlg.open)authDlg.close();
     if(!L.includes('edit')&&editDlg.open)editDlg.close();
     if(!L.includes('type')&&typeDlg.open)typeDlg.close();
-    if(!L.includes('review')&&revDlg.open)revDlg.close();
     if(!L.includes('editor')&&!shareView.hidden)hideShare();
     if(!L.includes('drawer'))closeDrawer();
     const b=s.b||DEF_B;
@@ -1152,14 +1028,14 @@ window.addEventListener('popstate',e=>{
 });
 try{history.scrollRestoration='manual'}catch(e){}
 
-/* rota inicial (abrir direto em /adm, /perfil, /componente/ID ...) */
+/* rota inicial */
 let pending=parseLoc();
 function fixUrl(){try{navPut(curL(),'replace')}catch(e){}}
 function resolvePending(){
   if(!pending)return;
   let b=pending;
   if(b.view==='component'&&!state.loaded)return;
-  if((b.view==='list'||b.view==='adm'||(b.view==='profile'&&b.pv==='me'))&&!state.authReady)return;
+  if((b.view==='list'||(b.view==='profile'&&b.pv==='me'))&&!state.authReady)return;
   pending=null;
   if(b.view==='profile'&&b.pv==='me'){
     if(!state.user){showView('explore',true);fixUrl();toast('Entre na sua conta para ver seu perfil.');openAuth('login');return}
@@ -1167,7 +1043,7 @@ function resolvePending(){
   }
   if(b.view==='component'&&!findItem(b.cid)){
     getDoc(doc(db,'components',b.cid)).then(s=>{
-      if(s.exists()){const c=docToItem(s);fetchUser(c.authorId);state.admAll=state.admAll;openView(c,true)}
+      if(s.exists()){const c=docToItem(s);fetchUser(c.authorId);openView(c,true)}
       else{toast('Componente não encontrado.');showView('explore',true)}
       fixUrl();
     },()=>{toast('Componente não encontrado.');showView('explore',true);fixUrl()});
@@ -1201,7 +1077,6 @@ function onNav(e){
   if(v==='explore'){state.cat=b.dataset.cat;state.tag='';showView('explore')}
   else if(v==='list'){if(!state.user){toast('Entre na sua conta para usar a Minha lista.');openAuth('login');return}showView('list')}
   else if(v==='profile'){if(!state.user){toast('Entre na sua conta para ver seu perfil.');openAuth('login');return}openProfile(state.user.uid)}
-  else if(v==='adm'){state.admTab='queue';showView('adm')}
 }
 $('#catNav').addEventListener('click',onNav);$('#myNav').addEventListener('click',onNav);$('#catBar').addEventListener('click',onNav);
 $('#tagCloud').addEventListener('click',e=>{const b=e.target.closest('[data-tag]');if(b)setTag(state.tag===b.dataset.tag?'':b.dataset.tag)});
@@ -1221,16 +1096,15 @@ function showView(v,silent){
   const y=shareView.hidden?window.scrollY:(state.edY||0);
   if(!shareView.hidden)hideShare();
   state.view=v;
-  if(v!=='component'){state.current=null;$('#vFrame').srcdoc='';stopThread()}
-  ['explore','list','profile','adm','component'].forEach(k=>{$('#s_'+k).hidden=k!==v});
+  if(v!=='component'){state.current=null;$('#vFrame').srcdoc=''}
+  ['explore','list','profile','component'].forEach(k=>{$('#s_'+k).hidden=k!==v});
   closeDrawer();
   if(!(NAV.popping||silent)){commitView(y);scrollTop()}
   renderNav();renderView();
 }
-function renderView(){({explore:renderExplore,list:renderList,profile:renderProfile,adm:renderAdm,component:()=>{if(state.current)paintViewStats()}})[state.view]()}
+function renderView(){({explore:renderExplore,list:renderList,profile:renderProfile,component:()=>{if(state.current)paintViewStats()}})[state.view]()}
 function renderAll(){renderNav();renderView()}
 
-const reviewN=()=>state.admAll.filter(c=>statusOf(c)==='review').length;
 function renderNav(){
   const counts={Todos:state.items.length};state.items.forEach(c=>{counts[c.cat]=(counts[c.cat]||0)+1});
   $$('#catNav .nv').forEach(b=>{b.setAttribute('aria-current',state.view==='explore'&&state.cat===b.dataset.cat?'page':'false');b.querySelector('em').textContent=counts[b.dataset.cat]||''});
@@ -1238,11 +1112,10 @@ function renderNav(){
   $$('#catBar .mchip').forEach(b=>{const on=state.view==='explore'&&state.cat===b.dataset.cat;b.setAttribute('aria-pressed',on);if(on)act=b});
   if(act&&bar.scrollWidth>bar.clientWidth){const l=act.offsetLeft-bar.clientWidth/2+act.offsetWidth/2;if(Math.abs(bar.scrollLeft-l)>40)bar.scrollTo({left:l,behavior:'smooth'})}
   $$('#myNav .nv').forEach(b=>{const v=b.dataset.view;
-    b.setAttribute('aria-current',(v==='list'&&state.view==='list')||(v==='adm'&&state.view==='adm')||(v==='profile'&&state.view==='profile'&&state.profileOwn)?'page':'false')});
+    b.setAttribute('aria-current',(v==='list'&&state.view==='list')||(v==='profile'&&state.view==='profile'&&state.profileOwn)?'page':'false')});
   $$('#mnav [data-m]').forEach(b=>{const m=b.dataset.m;
     b.setAttribute('aria-current',(m==='home'&&state.view==='explore')||(m==='list'&&state.view==='list')||(m==='me'&&state.view==='profile'&&state.profileOwn)?'page':'false')});
   const sc=state.items.filter(isSaved).length;$('#cntList').textContent=sc||'';
-  $('#navMod').hidden=!isAdmin();$('#cntMod').textContent=reviewN()||'';
   const tc={};state.items.forEach(c=>c.tags.forEach(t=>{tc[t]=(tc[t]||0)+1}));
   const top=Object.keys(tc).sort((a,b)=>tc[b]-tc[a]||a.localeCompare(b)).slice(0,16);
   $('#tagCloud').innerHTML=top.length?top.map(t=>'<button class="tagc" type="button" data-tag="'+esc(t)+'" aria-pressed="'+(state.tag===t)+'">#'+esc(t)+'</button>').join(''):'<p class="hint">As hashtags dos componentes aparecem aqui.</p>';
@@ -1262,36 +1135,28 @@ function paintCardAuthor(el,c){
   const av=el.querySelector('.av');if(av)setAv(av,c.authorId,authorOf(c));
   const a=el.querySelector('.author');if(a)a.textContent=authorOf(c);
 }
-function admBar(c){
-  const st=statusOf(c);
-  if(st==='review')return '<div class="modbar"><button class="btn ok sm" type="button" data-act="approve">Aprovar</button><button class="btn warn sm" type="button" data-act="changes">Ajustes</button><button class="btn danger sm" type="button" data-act="reject">Rejeitar</button></div>';
-  if(st==='published')return '<div class="modbar"><button class="btn ghost sm" type="button" data-act="feature">'+(c.featured?'Remover destaque':'Destacar')+'</button><button class="btn ghost sm" type="button" data-act="unpub">Despublicar</button></div>';
-  if(st==='rejected')return '<div class="modbar"><button class="btn ok sm" type="button" data-act="approve">Aprovar mesmo assim</button></div>';
-  return '';
-}
-function cardEl(c,mod){
+
+function cardEl(c){
   const st=statusOf(c),own=isOwn(c),pub=st==='published';
   const el=document.createElement('article');el.className='card';el.dataset.id=c.id;el.dataset.v=verOf(c);
   const reason=st==='rejected'&&c.rejectReason?'<p class="reason">'+(c.rejectKind==='changes'?'Ajustes pedidos: ':'Motivo: ')+esc(c.rejectReason)+'</p>':'';
   const ov=(pub&&c.tags.length?'<div class="ovtop">'+tagsHTML(c.tags.slice(0,3))+'</div>':'')+
     '<div class="ovbot"><span class="ovt">'+esc(c.title)+'</span>'+
     (pub?'<button class="chipbtn like" type="button" data-act="like" aria-pressed="false" aria-label="Curtir">'+ic(P.heart)+'<b>0</b></button>':'')+
-    '<button class="getcode" type="button" data-act="open">'+ic(P.code)+(mod?'Revisar':'Obter código')+'</button></div>';
+    '<button class="getcode" type="button" data-act="open">'+ic(P.code)+'Obter código</button></div>';
   const authorBlock='<button class="cauthor" type="button" data-act="author" aria-label="Ver perfil de '+esc(authorOf(c))+'"><span class="av"></span></button>'+
     '<div class="cinfo"><button class="cname" type="button" data-act="author"><span class="author"></span></button>';
   let foot;
   if(pub)foot='<div class="cfoot">'+authorBlock+'<span class="cviews"></span></div><button class="csave save" type="button" data-act="save" aria-pressed="false" aria-label="Salvar na minha lista">'+ic(P.mark)+'<b>0</b></button></div>';
-  else if(mod)foot='<div class="cfoot">'+authorBlock+'<span class="ctitle">'+esc(c.title)+'</span></div></div>';
   else foot='<div class="cfoot np"><button class="title" type="button" data-act="open">'+esc(c.title)+'</button>'+(own?'<button class="btn ghost sm" type="button" data-act="edit">Editar</button>':'')+'</div>'+reason;
   if(pub)foot=foot.replace('<span class="cviews"></span></div><button class="csave','<span class="cviews"></span></div><button class="csave');
-  const sel=mod&&st==='review'?'<label class="selbox" title="Selecionar"><input type="checkbox" data-sel aria-label="Selecionar"'+(state.sel[c.id]?' checked':'')+'></label>':'';
-  el.innerHTML='<div class="thumb"><iframe title="Pré-visualização: '+esc(c.title)+'" loading="lazy" sandbox="allow-scripts"></iframe>'+sel+((!pub||mod)&&!(mod&&pub)?'<span class="badge b-'+st+'">'+stLabel(c)+'</span>':'')+(mod&&c.featured?'<span class="badge star">Destaque</span>':'')+ov+'</div>'+foot+(mod?reason+admBar(c):'');
+  el.innerHTML='<div class="thumb"><iframe title="Pré-visualização: '+esc(c.title)+'" loading="lazy" sandbox="allow-scripts"></iframe>'+((!pub)?'<span class="badge b-'+st+'">'+stLabel(c)+'</span>':'')+(c.featured?'<span class="badge star">Destaque</span>':'')+ov+'</div>'+foot;
   el.querySelector('iframe').srcdoc=buildDoc(c,c.bg);
   const th=el.querySelector('.thumb');if(thumbRO)thumbRO.observe(th);requestAnimationFrame(()=>fitThumb(th));
   paintCardAuthor(el,c);
   return el;
 }
-function syncList(box,list,cch,emptyHTML,mod){
+function syncList(box,list,cch,emptyHTML){
   const ids={};list.forEach(c=>{ids[c.id]=1});
   Object.keys(cch).forEach(id=>{if(!ids[id]){const t=cch[id].querySelector('.thumb');if(t&&thumbRO)thumbRO.unobserve(t);cch[id].remove();delete cch[id]}});
   if(!list.length){Object.keys(cch).forEach(id=>delete cch[id]);box.classList.add('is-empty');box.innerHTML=emptyHTML;return}
@@ -1300,7 +1165,7 @@ function syncList(box,list,cch,emptyHTML,mod){
   list.forEach((c,i)=>{
     let el=cch[c.id];
     if(el&&el.dataset.v!==verOf(c)){el.remove();el=null}
-    if(!el)el=cch[c.id]=cardEl(c,mod);
+    if(!el)el=cch[c.id]=cardEl(c);
     if(box.children[i]!==el)box.insertBefore(el,box.children[i]||null);
   });
 }
@@ -1318,7 +1183,6 @@ function paintAuthors(){
   if(state.current){setAv($('#vAv'),state.current.authorId,authorOf(state.current));$('#vBy').textContent=authorOf(state.current)}
   renderCount();renderFeatureBy();
   if(state.view==='profile')renderProfile();
-  if(state.view==='adm'&&state.admTab==='users')renderAdm();
 }
 
 /* ---------- explorar ---------- */
@@ -1350,7 +1214,7 @@ function renderExplore(){
   $('#exSub').textContent=list.length+(list.length===1?' componente':' componentes');
   const tc=$('#tagClear');tc.hidden=!state.tag;tc.innerHTML='#'+esc(state.tag)+ic('<path d="M6 6l12 12M18 6L6 18"/>').replace('class="i"','class="i i-sm"');
   $('#grid').dataset.size=(state.cat==='Todos'||state.tag||state.q.trim())?'mix':sizeOf(state.cat);
-  syncList($('#grid'),list,caches.ex,emptyMain(),false);
+  syncList($('#grid'),list,caches.ex,emptyMain());
   refreshCounts(caches.ex);renderCount();renderFeature();
 }
 function renderCount(){
@@ -1387,244 +1251,14 @@ function renderList(){
   }
   const list=state.items.filter(isSaved).sort((a,b)=>(state.saveT[b.id]||0)-(state.saveT[a.id]||0));
   $('#listSub').textContent=list.length?list.length+(list.length===1?' código salvo':' códigos salvos'):'Códigos de outros criadores que você salvou.';
-  syncList($('#lGrid'),list,caches.ls,'<div class="empty"><h3>Sua lista está vazia</h3><p>Use o botão de marcador nos componentes para salvá-los aqui.</p><button class="btn" type="button" data-act="explore">Explorar componentes</button></div>',false);
+  syncList($('#lGrid'),list,caches.ls,'<div class="empty"><h3>Sua lista está vazia</h3><p>Use o botão de marcador nos componentes para salvá-los aqui.</p><button class="btn" type="button" data-act="explore">Explorar componentes</button></div>');
   refreshCounts(caches.ls);
 }
-
-/* ===================== ADMINISTRAÇÃO (/adm) ===================== */
-const ADM_TABS=[['queue','Fila de análise'],['published','Publicados'],['rejected','Rejeitados'],['draft','Rascunhos'],['users','Usuários'],['log','Histórico']];
-const VERB={approve:'aprovou',changes:'pediu ajustes em',reject:'rejeitou',unpublish:'despublicou',feature:'destacou',unfeature:'removeu o destaque de','delete':'excluiu'};
-const RV={
-  approve:{t:'Aprovar componente',ok:'Aprovar e publicar',req:false,cls:'ok',chips:['Ótimo trabalho!','Aprovado, obrigado por contribuir.','Dica: adicione mais hashtags para ser achado mais fácil.']},
-  changes:{t:'Pedir ajustes',ok:'Enviar pedido de ajustes',req:true,cls:'warn',chips:['Dê um título mais descritivo.','A pré-visualização não está funcionando direito.','Adicione hashtags relevantes.','Revise o tipo/categoria escolhido.','Parte do código está incompleta.','Melhore o contraste e a legibilidade.','Ajuste o tamanho para caber bem no card.']},
-  reject:{t:'Rejeitar componente',ok:'Rejeitar',req:true,cls:'danger',chips:['Conteúdo duplicado.','Conteúdo impróprio.','Código malicioso ou perigoso.','Não é um componente de interface.','Cópia sem dar crédito ao autor.']},
-  unpublish:{t:'Despublicar componente',ok:'Despublicar',req:false,cls:'',chips:['Estamos revisando este componente novamente.','Foi reportado e precisa de ajustes.']}
-};
-function admList(){
-  const q=state.admQ.trim().toLowerCase(),t=state.admTab;
-  const map={queue:'review',published:'published',rejected:'rejected',draft:'draft'};
-  const list=state.admAll.filter(c=>{
-    if(statusOf(c)!==map[t])return false;
-    if(!q)return true;
-    if(q[0]==='#'){const x=q.slice(1);return !x||c.tags.some(g=>g.indexOf(x)===0)}
-    return [c.title,authorOf(c),c.cat,c.tags.join(' ')].join(' ').toLowerCase().indexOf(q)>-1;
-  });
-  const s=state.admSort;
-  list.sort(s==='old'?(a,b)=>byNew(b,a):s==='likes'?(a,b)=>likeCount(b)-likeCount(a)||byNew(a,b):byNew);
-  return list;
-}
-const GATE_FORM='<form class="colform admlogin" id="admLogin" novalidate>'+
-  '<label class="f">E-mail do administrador<input id="admEmail" type="email" autocomplete="username" placeholder="admin@exemplo.com"></label>'+
-  '<label class="f">Senha<input id="admPass" type="password" autocomplete="current-password"></label>'+
-  '<p class="err" id="admErr" role="alert"></p>'+
-  '<button class="btn" id="admGo" type="submit">Entrar como administrador</button>'+
-  '<div class="center"><button class="linkbtn" id="admForgot" type="button">Esqueci minha senha</button></div></form>';
-function renderAdm(){
-  const gate=$('#admGate'),body=$('#admBody');let g=null;
-  if(!state.authReady)g=['Carregando…','Verificando seu acesso.',''];
-  else if(!ADMINS.length)g=['Nenhum administrador configurado','Coloque seu e-mail em ADMIN_EMAILS no código para liberar esta área.',''];
-  else if(!state.user)g=['Área restrita','Entre com o e-mail e a senha do administrador.','form'];
-  else if(!isAdmin())g=['Acesso restrito','Esta área é só para o administrador, com login por e-mail e senha. Você está conectado como '+esc(state.user.email||'outra conta')+'.','out'];
-  gate.hidden=!g;body.hidden=!!g;
-  if(g){
-    /* só reconstrói o bloco quando algo muda, para não apagar o que a pessoa está digitando */
-    const key=g[0]+'|'+g[2]+'|'+(state.user?state.user.uid:'');
-    if(gate.dataset.k!==key){
-      gate.dataset.k=key;
-      gate.innerHTML='<h3>'+g[0]+'</h3><p>'+g[1]+'</p>'+(g[2]==='form'?GATE_FORM:g[2]==='out'?'<button class="btn" type="button" data-act="signout">Sair e entrar com outra conta</button>':'');
-    }
-    return;
-  }
-  gate.dataset.k='';
-  const by={review:0,published:0,rejected:0,draft:0};state.admAll.forEach(c=>{by[statusOf(c)]=(by[statusOf(c)]||0)+1});
-  const stat=(n,l)=>'<div class="stat"><b>'+n+'</b><span>'+l+'</span></div>';
-  $('#admStats').innerHTML=stat(by.review,'Em análise')+stat(by.published,'Publicados')+stat(by.rejected,'Rejeitados')+stat(by.draft,'Rascunhos')+stat(state.likes.length,'Curtidas')+stat(state.views.length,'Visualizações');
-  const cnt={queue:by.review,published:by.published,rejected:by.rejected,draft:by.draft,users:state.admUsers?state.admUsers.length:'',log:''};
-  $('#admTabs').innerHTML=ADM_TABS.map(t=>'<button type="button" role="tab" data-atab="'+t[0]+'" aria-selected="'+(state.admTab===t[0])+'">'+t[1]+(cnt[t[0]]!==''?'<em>'+cnt[t[0]]+'</em>':'')+'</button>').join('');
-  $('#admSort').hidden=state.admTab==='users'||state.admTab==='log';
-  const comps=['queue','published','rejected','draft'].indexOf(state.admTab)>-1;
-  $('#admGrid').hidden=!comps;$('#admRows').hidden=comps;
-  if(comps){
-    const list=admList();
-    Object.keys(state.sel).forEach(id=>{if(!list.some(c=>c.id===id))delete state.sel[id]});
-    const empties={queue:['Nada para analisar','Quando alguém enviar um componente, ele aparece aqui.'],published:['Nenhum publicado','Os componentes aprovados aparecem aqui.'],rejected:['Nenhum rejeitado','Componentes recusados ou com ajustes pedidos aparecem aqui.'],draft:['Nenhum rascunho','Rascunhos dos usuários aparecem aqui.']}[state.admTab];
-    syncList($('#admGrid'),list,caches.md,'<div class="empty"><h3>'+empties[0]+'</h3><p>'+empties[1]+'</p></div>',true);
-    refreshCounts(caches.md);renderBulk(list);
-  }else{
-    $('#admBulk').hidden=true;
-    if(state.admTab==='users')renderAdmUsers();else renderAdmLog();
-  }
-}
-/* login do administrador (dentro de /adm) */
-$('#admGate').addEventListener('submit',e=>{
-  if(!e.target||e.target.id!=='admLogin')return;
-  e.preventDefault();
-  const err=$('#admErr'),email=$('#admEmail').value.trim(),pass=$('#admPass').value,btn=$('#admGo');err.textContent='';
-  if(!/^\S+@\S+\.\S+$/.test(email)){err.textContent='Digite um e-mail válido.';$('#admEmail').focus();return}
-  if(!pass){err.textContent='Digite sua senha.';$('#admPass').focus();return}
-  btn.disabled=true;
-  signInWithEmailAndPassword(auth,email,pass).then(()=>{},er=>{
-    const m=AUTH_ERR[er&&er.code];err.textContent=m===undefined?'Não foi possível entrar. Tente novamente.':m;
-  }).then(()=>{btn.disabled=false});
-});
-$('#admGate').addEventListener('click',e=>{
-  if(!e.target.closest('#admForgot'))return;
-  const email=$('#admEmail').value.trim(),err=$('#admErr');
-  if(!/^\S+@\S+\.\S+$/.test(email)){err.textContent='Digite seu e-mail acima para receber o link.';$('#admEmail').focus();return}
-  sendPasswordResetEmail(auth,email).then(()=>{err.textContent='';toast('Se houver uma conta com esse e-mail, enviamos o link para redefinir a senha.')},er=>{const m=AUTH_ERR[er&&er.code];err.textContent=m||'Não foi possível enviar o link.'});
-});
-$('#admOut').addEventListener('click',doSignOut);
-function renderBulk(list){
-  const box=$('#admBulk');list=list||admList();
-  if(state.admTab!=='queue'||!list.length){box.hidden=true;return}
-  const n=Object.keys(state.sel).length;
-  box.hidden=false;
-  box.innerHTML='<b>'+(n?n+(n===1?' selecionado':' selecionados'):list.length+' na fila')+'</b>'+
-    '<button class="btn ghost sm" type="button" data-b="all">Selecionar todos</button>'+
-    (n?'<button class="btn ghost sm" type="button" data-b="none">Limpar</button><button class="btn ok sm" type="button" data-b="approve">Aprovar selecionados</button><button class="btn warn sm" type="button" data-b="changes">Pedir ajustes</button><button class="btn danger sm" type="button" data-b="reject">Rejeitar selecionados</button>':'');
-}
-function renderAdmUsers(){
-  const box=$('#admRows');
-  if(!state.admUsers){box.innerHTML='<div class="empty"><h3>Carregando usuários…</h3></div>';loadAdmUsers();return}
-  const q=state.admQ.trim().toLowerCase();
-  const rows=state.admUsers.filter(u=>!q||String(u.displayName||'').toLowerCase().indexOf(q)>-1).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
-  if(!rows.length){box.innerHTML='<div class="empty"><h3>Nenhum usuário encontrado</h3></div>';return}
-  box.innerHTML=rows.map(u=>{
-    const mine=state.admAll.filter(c=>c.authorId===u.id),n=s=>mine.filter(c=>statusOf(c)===s).length,nm=u.displayName||'Criador';
-    return '<div class="rw click" data-uid="'+esc(u.id)+'">'+avHTML(nm,u)+'<div class="rt"><b>'+esc(nm)+'</b><small>'+(u.createdAt?'Na NEXU desde '+new Date(u.createdAt).toLocaleDateString('pt-BR',{month:'short',year:'numeric'}):'')+'</small></div>'+
-      '<div class="rn"><span class="tag">'+n('published')+' publicados</span><span class="tag">'+n('review')+' em análise</span><span class="tag">'+n('rejected')+' rejeitados</span></div></div>';
-  }).join('');
-}
-function loadAdmUsers(){
-  if(state.admUsers!==null&&state.admUsers._l)return;
-  getDocs(query(collection(db,'users'),limit(500))).then(s=>{
-    state.admUsers=s.docs.map(d=>Object.assign({id:d.id},d.data()));
-    s.docs.forEach(d=>{state.users[d.id]=d.data()});
-    if(state.view==='adm')renderAdm();
-  },()=>{state.admUsers=[];toast('Não foi possível carregar os usuários.');if(state.view==='adm')renderAdm()});
-}
-function renderAdmLog(){
-  const box=$('#admRows'),q=state.admQ.trim().toLowerCase();
-  const rows=state.log.filter(l=>!q||[l.byName,l.title,l.text,VERB[l.action]].join(' ').toLowerCase().indexOf(q)>-1);
-  if(!rows.length){box.innerHTML='<div class="empty"><h3>Sem atividade</h3><p>As ações de moderação aparecem aqui.</p></div>';return}
-  box.innerHTML=rows.slice(0,150).map(l=>'<div class="rw'+(findItem(l.c)?' click':'')+'" data-cid="'+esc(l.c)+'"><div class="rt"><b>'+esc(l.byName||'Admin')+' '+esc(VERB[l.action]||l.action)+' “'+esc(l.title||'')+'”</b>'+(l.text?'<q>'+esc(l.text)+'</q>':'')+'<small>'+fmtT(l.t)+'</small></div></div>').join('');
-}
-$('#admTabs').addEventListener('click',e=>{const b=e.target.closest('[data-atab]');if(!b||b.dataset.atab===state.admTab)return;state.admTab=b.dataset.atab;state.sel={};showView('adm')});
-$('#admQ').addEventListener('input',e=>{state.admQ=e.target.value;renderAdm()});
-$('#admSort').addEventListener('change',e=>{state.admSort=e.target.value;renderAdm()});
-$('#admGrid').addEventListener('change',e=>{
-  const t=e.target;if(!t.matches||!t.matches('[data-sel]'))return;
-  const id=t.closest('.card').dataset.id;if(t.checked)state.sel[id]=1;else delete state.sel[id];renderBulk();
-});
-$('#admBulk').addEventListener('click',e=>{
-  const b=e.target.closest('[data-b]');if(!b)return;const k=b.dataset.b,list=admList();
-  if(k==='all'){list.forEach(c=>{state.sel[c.id]=1});$$('#admGrid [data-sel]').forEach(x=>{x.checked=true});renderBulk(list);return}
-  if(k==='none'){state.sel={};$$('#admGrid [data-sel]').forEach(x=>{x.checked=false});renderBulk(list);return}
-  const chosen=list.filter(c=>state.sel[c.id]);if(!chosen.length)return;
-  if(k==='approve'){if(confirm('Aprovar '+chosen.length+' componente(s)?'))applyReview(chosen,'approve','')}
-  else openReview(chosen,k);
-});
-$('#admRows').addEventListener('click',e=>{
-  const u=e.target.closest('[data-uid]');if(u){openProfile(u.dataset.uid);return}
-  const c=e.target.closest('[data-cid]');if(c){const it=findItem(c.dataset.cid);if(it)openView(it)}
-});
-
-/* diálogo de revisão: aprovar, pedir ajustes, rejeitar, despublicar (individual ou em lote) */
-let rv=null;
-function openReview(list,mode){
-  if(!isAdmin()||!list.length)return;
-  rv={list:list,mode:mode};const m=RV[mode];
-  $('#rvTitle').textContent=m.t;
-  $('#rvSub').textContent=list.length===1?'“'+list[0].title+'” de '+authorOf(list[0]):list.length+' componentes selecionados';
-  $('#rvQuick').innerHTML=m.chips.map((t,i)=>'<button class="tagc" type="button" data-q="'+i+'">'+esc(t)+'</button>').join('');
-  $('#rvText').value='';$('#rvErr').textContent='';
-  const ok=$('#rvOk');ok.textContent=m.ok;ok.className='btn'+(m.cls?' '+m.cls:'');
-  if(!revDlg.open){revDlg.showModal();pushLayer('review')}
-  syncLock();
-}
-$('#rvQuick').addEventListener('click',e=>{
-  const b=e.target.closest('[data-q]');if(!b||!rv)return;
-  const t=RV[rv.mode].chips[+b.dataset.q],ta=$('#rvText');
-  ta.value=(ta.value.trim()?ta.value.trim()+' ':'')+t;ta.focus();
-});
-$('#rvClose').addEventListener('click',()=>revDlg.close());
-$('#rvCancel').addEventListener('click',()=>revDlg.close());
-revDlg.addEventListener('click',e=>{if(e.target===revDlg)revDlg.close()});
-$('#revForm').addEventListener('submit',e=>{
-  e.preventDefault();if(!rv)return;
-  const text=$('#rvText').value.trim();
-  if(RV[rv.mode].req&&text.length<3){$('#rvErr').textContent='Escreva uma mensagem para o autor (mínimo 3 letras).';$('#rvText').focus();return}
-  const r=rv;revDlg.close();applyReview(r.list,r.mode,text);
-});
-function applyReview(list,mode,text){
-  if(!isAdmin())return;
-  const now=Date.now(),uid=state.user.uid,nm=myName();
-  const chunks=[];for(let i=0;i<list.length;i+=120)chunks.push(list.slice(i,i+120));
-  Promise.all(chunks.map(ch=>{
-    const b=writeBatch(db);
-    ch.forEach(c=>{
-      const ref=doc(db,'components',c.id);
-      if(mode==='approve')b.update(ref,{status:'published',rejectReason:'',rejectKind:'',updatedAt:now});
-      else if(mode==='changes')b.update(ref,{status:'rejected',rejectKind:'changes',rejectReason:text,updatedAt:now});
-      else if(mode==='reject')b.update(ref,{status:'rejected',rejectKind:'reject',rejectReason:text,updatedAt:now});
-      else if(mode==='unpublish')b.update(ref,{status:'review',rejectReason:'',rejectKind:'',updatedAt:now});
-      if(text)b.set(doc(collection(db,'feedback')),{c:c.id,authorId:c.authorId,by:uid,byName:nm,text:text,kind:mode,internal:false,role:'admin',t:now});
-      b.set(doc(collection(db,'modlog')),{c:c.id,title:c.title,authorId:c.authorId,by:uid,byName:nm,action:mode,text:text||'',t:now});
-    });
-    return b.commit();
-  })).then(()=>{
-    const n=list.length,msg={approve:'aprovado',changes:'ajustes enviados ao autor',reject:'rejeitado',unpublish:'despublicado'}[mode];
-    toast(n===1?'Componente '+msg:n+' componentes: '+msg);
-    state.sel={};
-  },()=>toast('Não foi possível concluir. Confira as regras do Firestore e se seu e-mail está nelas.'));
-}
-function toggleFeature(c){
-  if(!isAdmin())return;const on=!c.featured;
-  const b=writeBatch(db);
-  b.update(doc(db,'components',c.id),{featured:on});
-  b.set(doc(collection(db,'modlog')),{c:c.id,title:c.title,authorId:c.authorId,by:state.user.uid,byName:myName(),action:on?'feature':'unfeature',text:'',t:Date.now()});
-  b.commit().then(()=>toast(on?'Componente em destaque':'Destaque removido'),()=>toast('Não foi possível alterar o destaque.'));
-}
-
-/* comentários / feedback (autor ↔ administração) */
-let unsubT=null;
-function stopThread(){if(unsubT){unsubT();unsubT=null}state.thread=[]}
-function startThread(c){
-  stopThread();
-  if(!state.user||!(isAdmin()||isOwn(c))){renderThread();return}
-  const col=collection(db,'feedback');
-  const qy=isAdmin()?query(col,where('c','==',c.id)):query(col,where('c','==',c.id),where('authorId','==',state.user.uid),where('internal','==',false));
-  unsubT=onSnapshot(qy,snap=>{
-    state.thread=snap.docs.map(d=>Object.assign({id:d.id},d.data())).sort((a,b)=>(a.t||0)-(b.t||0));renderThread();
-  },()=>{state.thread=[];renderThread()});
-  renderThread();
-}
-function renderThread(){
-  const c=state.current,box=$('#vThread');
-  if(!c||!state.user||!(isAdmin()||isOwn(c))){box.hidden=true;return}
-  const adm=isAdmin();
-  if(!adm&&statusOf(c)==='published'&&!state.thread.length){box.hidden=true;return}
-  box.hidden=false;
-  $('#vThreadHint').textContent=adm?'Converse com o autor para ajudar a melhorar o componente. Notas internas só aparecem para administradores.':'Mensagens da moderação sobre este componente. Você pode responder aqui.';
-  $('#vThreadIntL').hidden=!adm;
-  $('#vThreadList').innerHTML=state.thread.length?state.thread.map(m=>{
-    const u=state.users[m.by],nm=m.byName||'Usuário';
-    return '<div class="tmsg'+(m.internal?' int':'')+'">'+avHTML(nm,u)+'<div class="tb"><div class="th"><b>'+esc(nm)+'</b><span class="tag">'+(m.role==='admin'?'Moderação':'Autor')+'</span>'+(m.internal?'<span class="tag" style="color:var(--warn)">Nota interna</span>':'')+'<small>'+fmtT(m.t)+'</small></div><p>'+esc(m.text)+'</p></div></div>';
-  }).join(''):'<p class="hint">Ainda não há mensagens.</p>';
-}
-$('#vThreadForm').addEventListener('submit',e=>{
-  e.preventDefault();const c=state.current;if(!c||!state.user)return;
-  const ta=$('#vThreadText'),text=ta.value.trim();if(text.length<2)return;
-  const adm=isAdmin(),internal=adm&&$('#vThreadInt').checked;
-  addDoc(collection(db,'feedback'),{c:c.id,authorId:c.authorId,by:state.user.uid,byName:myName(),text:text,kind:'comment',internal:internal,role:adm&&!isOwn(c)?'admin':'author',t:Date.now()})
-    .then(()=>{ta.value='';$('#vThreadInt').checked=false},()=>toast('Não foi possível enviar o comentário.'));
-});
 
 /* ---------- cliques nas grades ---------- */
 function onGridClick(e){
   const b=e.target.closest('[data-act]');
   if(!b){
-    if(e.target.closest('.selbox'))return;
     if(window.matchMedia&&matchMedia('(hover:none)').matches){
       const t=e.target.closest('.thumb'),cd=t&&t.closest('.card'),c=cd&&findItem(cd.dataset.id);
       if(c)openView(c);
@@ -1644,13 +1278,8 @@ function onGridClick(e){
   else if(act==='author')openProfile(c.authorId);
   else if(act==='tag')setTag(b.dataset.tag);
   else if(act==='edit')openEditor(c);
-  else if(act==='approve')openReview([c],'approve');
-  else if(act==='changes')openReview([c],'changes');
-  else if(act==='reject')openReview([c],'reject');
-  else if(act==='unpub')openReview([c],'unpublish');
-  else if(act==='feature')toggleFeature(c);
 }
-['#grid','#lGrid','#pGrid','#admGrid','#admGate'].forEach(s=>$(s).addEventListener('click',onGridClick));
+['#grid','#lGrid','#pGrid'].forEach(s=>$(s).addEventListener('click',onGridClick));
 
 /* ---------- curtir / salvar / visualizar ---------- */
 function toggleLike(c){
@@ -1696,18 +1325,14 @@ function paintViewBg(){
   $('#vFrame').srcdoc=buildDoc(state.current,state.bg);
 }
 function paintViewMeta(c){
-  const st=statusOf(c),pub=st==='published',adm=isAdmin();
+  const st=statusOf(c),pub=st==='published';
   $('#vTitle').textContent=c.title;$('#vBy').textContent=authorOf(c);$('#vCat').textContent=c.cat;
   setAv($('#vAv'),c.authorId,authorOf(c));
   const sb=$('#vStatus');sb.hidden=pub;sb.className='badge inl b-'+st;sb.textContent=stLabel(c);
   $('#vTags').innerHTML=tagsHTML(c.tags);
   const rj=$('#vRej');rj.hidden=!(st==='rejected'&&c.rejectReason);rj.textContent=(c.rejectKind==='changes'?'Ajustes pedidos: ':'Motivo da rejeição: ')+(c.rejectReason||'');
-  $('#vEdit').hidden=!isOwn(c);$('#vDel').hidden=!(isOwn(c)||adm);
+  $('#vEdit').hidden=!isOwn(c);$('#vDel').hidden=!isOwn(c);
   $('#vLike').hidden=!pub;$('#vSave').hidden=!pub;
-  $('#vApprove').hidden=!(adm&&(st==='review'||st==='rejected'));
-  $('#vChanges').hidden=!(adm&&st==='review');$('#vReject').hidden=!(adm&&st==='review');
-  $('#vUnpub').hidden=!(adm&&pub);$('#vFeature').hidden=!(adm&&pub);$('#vFeature').textContent=c.featured?'Remover destaque':'Destacar';
-  renderThread();
 }
 function refreshCurrent(){
   const c=state.current;if(!c||state.view!=='component')return;
@@ -1717,7 +1342,6 @@ function refreshCurrent(){
 function openView(c,silent){
   state.current=c;state.tab='html';state.bg=c.bg||'dark';
   paintViewMeta(c);paintCode();paintViewStats();
-  startThread(c);
   showView('component',silent);
   paintViewBg();
   recordView(c);
@@ -1738,17 +1362,10 @@ $('#vLike').addEventListener('click',()=>{if(state.current)toggleLike(state.curr
 $('#vSave').addEventListener('click',()=>{if(state.current)toggleSave(state.current)});
 $('#vByBtn').addEventListener('click',()=>{if(state.current)openProfile(state.current.authorId)});
 $('#vEdit').addEventListener('click',()=>{const c=state.current;if(!c||!isOwn(c))return;openEditor(c)});
-$('#vApprove').addEventListener('click',()=>{if(state.current&&isAdmin())openReview([state.current],'approve')});
-$('#vChanges').addEventListener('click',()=>{if(state.current&&isAdmin())openReview([state.current],'changes')});
-$('#vReject').addEventListener('click',()=>{if(state.current&&isAdmin())openReview([state.current],'reject')});
-$('#vUnpub').addEventListener('click',()=>{if(state.current&&isAdmin())openReview([state.current],'unpublish')});
-$('#vFeature').addEventListener('click',()=>{if(state.current&&isAdmin())toggleFeature(state.current)});
 $('#vDel').addEventListener('click',()=>{
-  const c=state.current;if(!c||!(isOwn(c)||isAdmin()))return;
+  const c=state.current;if(!c||!isOwn(c))return;
   if(!confirm('Excluir “'+c.title+'”? Isso não pode ser desfeito.'))return;
-  const adm=isAdmin()&&!isOwn(c);
   deleteDoc(doc(db,'components',c.id)).then(()=>{
-    if(adm)addDoc(collection(db,'modlog'),{c:c.id,title:c.title,authorId:c.authorId,by:state.user.uid,byName:myName(),action:'delete',text:'',t:Date.now()}).catch(()=>{});
     goBack();toast('Componente excluído');
   },()=>toast('Não foi possível excluir.'));
 });
@@ -1834,7 +1451,7 @@ function paintAuth(){
 let migrated=false;
 function migrateLegacy(){
   if(migrated||!state.user)return;migrated=true;
-  const src=isAdmin()?collection(db,'components'):query(collection(db,'components'),where('authorId','==',state.user.uid));
+  const src=query(collection(db,'components'),where('authorId','==',state.user.uid));
   getDocs(src).then(s=>{
     const todo=s.docs.filter(d=>!d.data().status).slice(0,450);if(!todo.length)return;
     const b=writeBatch(db);todo.forEach(d=>b.update(d.ref,{status:'published',tags:d.data().tags||[]}));return b.commit();
@@ -1851,25 +1468,14 @@ function startUserListeners(u){
     if(state.view==='profile'&&state.profileOwn)renderProfile();
     refreshCurrent();
   },()=>{});
-  if(isAdmin()){
-    unsubs.adm=onSnapshot(query(collection(db,'components'),limit(1000)),snap=>{
-      state.admAll=snap.docs.map(docToItem);state.admLoaded=true;state.admAll.forEach(c=>fetchUser(c.authorId));
-      renderNav();if(state.view==='adm')renderAdm();refreshCurrent();
-    },()=>{state.admLoaded=true;toast('Sem permissão para listar todos os componentes. Confira as regras do Firestore.')});
-    unsubs.log=onSnapshot(query(collection(db,'modlog'),limit(300)),snap=>{
-      state.log=snap.docs.map(d=>d.data()).sort((a,b)=>(b.t||0)-(a.t||0));
-      if(state.view==='adm'&&state.admTab==='log')renderAdm();
-    },()=>{});
-  }
 }
 onAuthStateChanged(auth,u=>{
   state.user=u;state.profile=null;state.authReady=true;
   Object.keys(unsubs).forEach(k=>{if(unsubs[k]){unsubs[k]();unsubs[k]=null}});
-  state.saves={};state.saveT={};state.mineAll=[];state.admAll=[];state.admLoaded=false;state.admUsers=null;state.log=[];state.sel={};migrated=false;
+  state.saves={};state.saveT={};state.mineAll=[];migrated=false;
   recomputeLikes();recomputeViews();paintAuth();
   if(!u){
     if(pending){resolvePending();return}
-    /* em /adm fica na tela de login do administrador; nas áreas de conta volta para Explorar */
     if(state.view==='list'||(state.view==='profile'&&state.profileOwn))showView('explore');else renderAll();
     return;
   }
@@ -1939,7 +1545,7 @@ function renderProfile(){
   const TL=[['published','Publicados'],['review','Em análise'],['rejected','Rejeitados'],['draft','Rascunhos']];
   if(own)tabs.innerHTML=TL.map(t=>'<button type="button" role="tab" data-ptab="'+t[0]+'" aria-selected="'+(state.ptab===t[0])+'">'+t[1]+'<em>'+by[t[0]].length+'</em></button>').join('');
   const tab=own?state.ptab:'published';
-  syncList($('#pGrid'),by[tab].sort(byNew),caches.pf,emptyProfile(own,tab),false);
+  syncList($('#pGrid'),by[tab].sort(byNew),caches.pf,emptyProfile(own,tab));
   refreshCounts(caches.pf);renderNav();
 }
 $('#pTabs').addEventListener('click',e=>{const b=e.target.closest('[data-ptab]');if(!b)return;state.ptab=b.dataset.ptab;renderProfile();fixUrl()});
@@ -2056,7 +1662,7 @@ function updateEditTabs(){
 $('#editTabs').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;activeEditTab=b.dataset.ed;updateEditTabs()});
 function submitLabel(){
   if(state.editing)return 'Salvar alterações';
-  return (isAdmin()||!MOD)?'Publicar':'Enviar para análise';
+  return 'Publicar';
 }
 function showEditor(){
   activeEditTab='html';updateEditTabs();$('#fErr').textContent='';
@@ -2116,14 +1722,14 @@ function saveComponent(target){
   if(target!=='draft'&&!html.trim()){err.textContent='O HTML é obrigatório para publicar.';activeEditTab='html';updateEditTabs();$('#fHtml').focus();return}
   if((html+css+js).length>180000){err.textContent='Código muito longo (limite ~180 mil caracteres).';return}
   err.textContent='';
-  const status=target==='draft'?'draft':((isAdmin()||!MOD)?'published':'review');
+  const status=target==='draft'?'draft':'published';
   const base={title:title,cat:currentCat,bg:sBg,html:html,css:css,js:js,tags:tags,status:status,rejectReason:'',rejectKind:'',updatedAt:Date.now()};
   const editing=state.editing;
   $('#fSubmit').disabled=true;$('#fDraft').disabled=true;
   const p=editing?updateDoc(doc(db,'components',editing),base):addDoc(collection(db,'components'),Object.assign({authorId:state.user.uid,authorName:myName(),createdAt:Date.now()},base));
   p.then(()=>{
     $('#fSubmit').disabled=false;$('#fDraft').disabled=false;hideShare();
-    toast(status==='draft'?'Rascunho salvo':status==='review'?'Enviado para análise':editing?'Alterações salvas':'Publicado para todos');
+    toast(status==='draft'?'Rascunho salvo':editing?'Alterações salvas':'Publicado para todos');
     if(status==='published'){
       state.cat='Todos';state.tag='';state.sort='new';
       $$('#sortSeg button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.sort==='new'));
@@ -2155,7 +1761,6 @@ onSnapshot(query(collection(db,'likes'),limit(3000)),snap=>{
   recomputeLikes();refreshAllCounts();
   if(state.view==='explore'&&(state.sort==='pop'||!$('#hero').hidden))renderExplore();
   if(state.view==='profile')renderProfile();
-  if(state.view==='adm')renderAdm();
 },()=>{});
 onSnapshot(query(collection(db,'views'),limit(5000)),snap=>{
   state.views=snap.docs.map(d=>d.data()).filter(v=>v&&v.c);

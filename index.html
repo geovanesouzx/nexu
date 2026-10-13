@@ -1,0 +1,887 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NEXU – Componentes UI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Geist:wght@400..700&family=Geist+Mono:wght@400..500&display=swap" rel="stylesheet">
+<style>
+:root {
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  --display: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  --body: 'Geist', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --mono: 'Geist Mono', ui-monospace, monospace;
+  
+  /* Tema Dark Profundo (Baseado na imagem) */
+  --bg-app: #0a0a0a;
+  --bg-sidebar: #0f0f0f;
+  --bg0: #090a14;
+  --text: #f4f5ff; 
+  --muted: #a1a1aa;
+  --accent: #8a7dff; 
+  --accent2: #ff6fc3;
+  --glass-a: rgba(255,255,255,.05); 
+  --glass-b: rgba(255,255,255,.02);
+  --glass-border: rgba(255,255,255,.1); 
+  --glass-hi: rgba(255,255,255,.2);
+  --shadow: rgba(0,0,0,.55);
+  --dlg-a: rgba(20,20,25,.95); 
+  --dlg-b: rgba(10,10,15,.95);
+  --code-bg: rgba(0,0,0,.4); 
+  --code-text: #e5e6ff;
+  --field: rgba(255,255,255,.05);
+  --blob1: #5a4bff; --blob2: #ff4fa8; --blob3: #12d6c8; --blob4: #ffa83d; --blob-o: .15;
+}
+
+html { scroll-behavior: smooth; }
+*, *::before, *::after { box-sizing: border-box; }
+body { 
+  margin: 0; background: var(--bg-app); color: var(--text); 
+  font-family: var(--body); font-size: 15px; line-height: 1.5; 
+  height: 100vh; overflow: hidden; -webkit-font-smoothing: antialiased;
+}
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; background: transparent; border: none; padding: 0; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.hidden { display: none !important; }
+
+/* Aurora de Fundo */
+.aurora { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; background: var(--bg-app); }
+.aurora i { position: absolute; border-radius: 50%; filter: blur(100px); opacity: var(--blob-o); will-change: transform; }
+.aurora i:nth-child(1) { width: 40vmax; height: 40vmax; left: -10vmax; top: -10vmax; background: var(--blob1); animation: d1 30s ease-in-out infinite alternate; }
+.aurora i:nth-child(2) { width: 35vmax; height: 35vmax; right: -10vmax; bottom: -10vmax; background: var(--blob2); animation: d2 35s ease-in-out infinite alternate; }
+@keyframes d1 { to { transform: translate(5vmax, 5vmax) scale(1.1); } }
+@keyframes d2 { to { transform: translate(-5vmax, -5vmax) scale(0.9); } }
+
+/* Liquid Glass Compartilhado */
+.glass {
+  position: relative;
+  background: linear-gradient(135deg, var(--glass-a), var(--glass-b));
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid var(--glass-border);
+  box-shadow: inset 0 1px 1px var(--glass-hi), 0 10px 30px -10px var(--shadow);
+}
+
+/* Botões */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 10px 18px; border-radius: 12px; font-weight: 600; font-size: 14px; color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.3), 0 4px 12px -4px var(--accent);
+  transition: all .2s;
+}
+.btn:hover { transform: translateY(-1px); filter: brightness(1.1); }
+.btn:active { transform: scale(.97); }
+.btn.ghost { 
+  background: var(--field); border: 1px solid var(--glass-border); 
+  color: var(--text); box-shadow: none; 
+}
+.btn.ghost:hover { background: rgba(255,255,255,.1); }
+.iconbtn { width: 36px; height: 36px; padding: 0; border-radius: 10px; }
+.i { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.app-layout {
+  display: flex; height: 100vh; width: 100vw;
+}
+.sidebar {
+  width: 260px; height: 100%; background: var(--bg-sidebar); border-right: 1px solid var(--glass-border);
+  display: flex; flex-direction: column; z-index: 10;
+}
+.main-content {
+  flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative;
+}
+
+/* Componentes da Sidebar */
+.sb-header { padding: 20px; display: flex; align-items: center; gap: 10px; }
+.sb-logo { font-family: var(--display); font-weight: 800; font-size: 20px; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+.sb-logo svg { width: 24px; height: 24px; }
+.sb-nav { flex: 1; overflow-y: auto; padding: 0 12px 20px; display: flex; flex-direction: column; gap: 4px; }
+.sb-item {
+  display: flex; align-items: center; gap: 12px; padding: 10px 12px;
+  border-radius: 10px; color: var(--muted); font-size: 14px; font-weight: 500;
+  transition: all .2s; text-decoration: none; width: 100%; text-align: left;
+}
+.sb-item:hover { color: var(--text); background: rgba(255,255,255,.05); }
+.sb-item.active { color: var(--text); background: rgba(255,255,255,.1); }
+.sb-item svg { width: 18px; height: 18px; opacity: 0.8; }
+.sb-user { padding: 16px; border-top: 1px solid var(--glass-border); display: flex; align-items: center; gap: 12px; cursor: pointer; }
+.sb-user:hover { background: rgba(255,255,255,.03); }
+.avatar-sm { width: 32px; height: 32px; border-radius: 8px; background: var(--field); display: grid; place-items: center; font-weight: bold; font-size: 14px; }
+.user-info { display: flex; flex-direction: column; overflow: hidden; }
+.user-info b { font-size: 13px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+.user-info span { font-size: 11px; color: var(--muted); }
+
+/* Topbar do Conteúdo */
+.topbar {
+  padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  border-bottom: 1px solid var(--glass-border); background: rgba(10,10,10,0.8); backdrop-filter: blur(12px); z-index: 5;
+}
+.search-box { position: relative; flex: 1; max-width: 400px; }
+.search-box .i { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); }
+.search-box input {
+  width: 100%; height: 40px; padding: 0 16px 0 40px; border-radius: 12px;
+  border: 1px solid var(--glass-border); background: var(--field);
+  font-size: 14px; transition: all .2s;
+}
+.search-box input:focus { border-color: var(--accent); background: rgba(255,255,255,.1); }
+
+/* Views (Telas) */
+.view-layer { position: absolute; inset: 0; background: var(--bg-app); display: flex; flex-direction: column; z-index: 50; transition: opacity .3s; }
+.page-layer { flex: 1; overflow-y: auto; padding: 24px; }
+.page-layer::-webkit-scrollbar { width: 8px; }
+.page-layer::-webkit-scrollbar-thumb { background: rgba(255,255,255,.2); border-radius: 4px; }
+
+.auth-box {
+  margin: auto; width: 100%; max-width: 400px; padding: 32px; border-radius: 24px;
+  display: flex; flex-direction: column; gap: 20px; text-align: center;
+}
+.auth-box h1 { font-family: var(--display); font-size: 28px; margin: 0; }
+.auth-box p { color: var(--muted); font-size: 14px; margin: 0; }
+.social-btn {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; padding: 12px; border-radius: 12px; font-weight: 600; font-size: 14px;
+  background: var(--field); border: 1px solid var(--glass-border); transition: all .2s;
+}
+.social-btn:hover { background: rgba(255,255,255,.1); transform: translateY(-1px); }
+.social-btn svg { width: 20px; height: 20px; }
+
+.f-group { display: flex; flex-direction: column; gap: 6px; text-align: left; }
+.f-group label { font-size: 13px; font-weight: 500; color: var(--muted); }
+.f-group input { 
+  padding: 12px; border-radius: 12px; border: 1px solid var(--glass-border); 
+  background: rgba(0,0,0,.5); font-size: 14px; 
+}
+.f-group input:focus { border-color: var(--accent); }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; padding-bottom: 40px; }
+.card { border-radius: 20px; padding: 8px; transition: transform .2s; border: 1px solid transparent; background: rgba(255,255,255,.02); }
+.card:hover { transform: translateY(-4px); background: rgba(255,255,255,.05); border-color: var(--glass-border); }
+.thumb { position: relative; height: 220px; border-radius: 14px; overflow: hidden; background: #000; border: 1px solid var(--glass-border); }
+.thumb iframe { width: 100%; height: 100%; border: 0; display: block; pointer-events: none; }
+.code-btn {
+  position: absolute; right: 10px; bottom: 10px; display: inline-flex; align-items: center; gap: 6px; 
+  padding: 8px 12px; border-radius: 10px; font-size: 12px; font-weight: 600; color: #fff;
+  background: rgba(0,0,0,.7); border: 1px solid rgba(255,255,255,.2); backdrop-filter: blur(8px);
+  opacity: 0; transform: translateY(5px); transition: all .2s; pointer-events: auto;
+}
+.card:hover .code-btn { opacity: 1; transform: none; }
+.meta { padding: 12px 8px 4px; }
+.title { font-family: var(--display); font-weight: 600; font-size: 16px; margin: 0 0 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.row { display: flex; align-items: center; gap: 8px; }
+.author-name { font-size: 13px; color: var(--muted); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.like-btn { 
+  display: inline-flex; align-items: center; gap: 4px; padding: 4px 8px; border-radius: 8px; 
+  font-size: 12px; font-weight: 600; color: var(--muted); background: var(--field); transition: all .2s;
+}
+.like-btn:hover { background: rgba(255,255,255,.1); }
+.like-btn[aria-pressed="true"] { color: #ff3d8b; }
+.like-btn[aria-pressed="true"] svg { fill: #ff3d8b; stroke: #ff3d8b; }
+.like-btn svg { width: 14px; height: 14px; transition: transform .2s; }
+.like-btn:active svg { transform: scale(1.3); }
+
+.profile-header {
+  padding: 20px 0; display: flex; flex-direction: column; align-items: center; text-align: center; border-bottom: 1px solid var(--glass-border); margin-bottom: 24px; position: relative;
+}
+.ph-top { position: absolute; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; }
+.ph-stats { display: flex; gap: 16px; font-size: 14px; color: var(--muted); }
+.ph-stats b { color: var(--text); }
+.avatar-huge { 
+  width: 140px; height: 140px; border-radius: 24px; margin-bottom: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.5); display: grid; place-items: center; font-size: 48px; font-weight: bold;
+}
+.ph-name { font-family: var(--display); font-size: 28px; font-weight: 700; margin: 0 0 8px; }
+.ph-handle { color: var(--muted); font-size: 15px; display: flex; align-items: center; gap: 6px; justify-content: center; }
+.profile-tabs { display: flex; gap: 20px; border-bottom: 1px solid var(--glass-border); margin-bottom: 24px; }
+.ptab { padding: 10px 4px; font-size: 14px; font-weight: 600; color: var(--muted); border-bottom: 2px solid transparent; transition: all .2s; }
+.ptab:hover { color: var(--text); }
+.ptab.active { color: var(--text); border-bottom-color: var(--text); }
+.empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
+.empty-state svg { width: 64px; height: 64px; opacity: 0.2; margin-bottom: 16px; }
+
+dialog { padding: 0; border: 0; background: transparent; color: var(--text); max-width: none; max-height: none; }
+dialog::backdrop { background: rgba(0,0,0,.7); backdrop-filter: blur(8px); }
+.dlg { 
+  width: min(1000px, 94vw); max-height: min(90vh, 800px); overflow: hidden; border-radius: 24px;
+  background: var(--bg-sidebar); border: 1px solid var(--glass-border); display: flex; flex-direction: column;
+}
+.dlg-head { padding: 16px 24px; border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; }
+.dlg-body { display: flex; flex: 1; min-height: 0; }
+.pane { flex: 1; padding: 20px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.pane.left { border-right: 1px solid var(--glass-border); }
+.stage { flex: 1; border-radius: 16px; overflow: hidden; background: #000; border: 1px solid var(--glass-border); position: relative; min-height: 300px; }
+.stage iframe { width: 100%; height: 100%; border: 0; display: block; }
+.bgs-ctrl { position: absolute; top: 12px; right: 12px; display: flex; gap: 6px; background: rgba(0,0,0,.6); padding: 6px; border-radius: 12px; backdrop-filter: blur(8px); }
+.bgs-ctrl button { width: 20px; height: 20px; border-radius: 6px; border: 1px solid rgba(255,255,255,.2); }
+.bgs-ctrl button[aria-pressed="true"] { outline: 2px solid #fff; outline-offset: 2px; }
+
+.code-area { flex: 1; border-radius: 16px; background: var(--code-bg); border: 1px solid var(--glass-border); display: flex; flex-direction: column; overflow: hidden; }
+.code-tabs { display: flex; border-bottom: 1px solid var(--glass-border); background: rgba(0,0,0,.3); }
+.code-tabs button { padding: 10px 16px; font-size: 13px; font-family: var(--mono); color: var(--muted); border-bottom: 2px solid transparent; }
+.code-tabs button.active { color: var(--text); border-bottom-color: var(--accent); background: rgba(255,255,255,.05); }
+.code-area textarea, .code-area pre { 
+  flex: 1; width: 100%; padding: 16px; margin: 0; border: 0; background: transparent; 
+  color: var(--code-text); font: 13.5px/1.6 var(--mono); resize: none; outline: none; overflow: auto;
+}
+.code-area textarea.hidden { display: none; }
+
+.toast { 
+  position: fixed; bottom: 24px; left: 50%; transform: translate(-50%, 20px); z-index: 9999;
+  background: var(--text); color: var(--bg-app); padding: 12px 24px; border-radius: 12px; font-weight: 600; font-size: 14px;
+  opacity: 0; pointer-events: none; transition: all .3s; box-shadow: 0 10px 25px rgba(0,0,0,.5);
+}
+.toast.on { opacity: 1; transform: translate(-50%, 0); }
+
+@media (max-width: 768px) {
+  .app-layout { flex-direction: column; }
+  .sidebar { width: 100%; height: auto; flex-direction: row; overflow-x: auto; padding: 10px; border-right: none; border-bottom: 1px solid var(--glass-border); }
+  .sb-header, .sb-user { display: none; }
+  .sb-nav { flex-direction: row; padding: 0; overflow-y: visible; }
+  .sb-item { width: auto; white-space: nowrap; padding: 8px 12px; }
+  .dlg-body { flex-direction: column; }
+  .pane.left { border-right: none; border-bottom: 1px solid var(--glass-border); height: 40vh; flex: none; }
+  .ph-top { position: static; margin-bottom: 16px; }
+}
+</style>
+</head>
+<body>
+<div class="aurora"><i></i><i></i></div>
+
+<div id="view-auth" class="view-layer">
+  <div class="auth-box glass">
+    <div style="display:flex;justify-content:center;margin-bottom:-10px">
+      <svg viewBox="0 0 32 32" style="width:48px;height:48px"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8a7dff"/><stop offset="1" stop-color="#ff6fc3"/></linearGradient></defs><rect x="1" y="1" width="30" height="30" rx="10" fill="url(#lg)"/><path d="M9.5 22V10l13 12V10" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <h1>Bem-vindo ao NEXU</h1>
+    <p>A maior comunidade de componentes UI em Liquid Glass. Entre para criar e curtir.</p>
+    
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:10px">
+      <button class="social-btn" onclick="app.login()">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        Continuar com Google
+      </button>
+      <button class="social-btn" onclick="app.login()">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        Continuar com GitHub
+      </button>
+      <button class="social-btn" onclick="app.login()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Continuar com Email
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="view-setup" class="view-layer hidden">
+  <div class="auth-box glass">
+    <h2>Quase lá!</h2>
+    <p>Crie seu perfil único para compartilhar componentes na comunidade.</p>
+    <form id="setupForm" onsubmit="event.preventDefault(); app.saveProfile();">
+      <div class="f-group">
+        <label>Nome de usuário (único)</label>
+        <input type="text" id="suUsername" placeholder="ex: dev_ninja" required pattern="[a-zA-Z0-9_]{3,15}">
+      </div>
+      <div class="f-group" style="margin-top:12px">
+        <label>Nome de Exibição</label>
+        <input type="text" id="suName" placeholder="Ex: João Silva" required minlength="2">
+      </div>
+      <button type="submit" class="btn" style="width:100%; margin-top:24px; padding:12px">Criar Perfil</button>
+      <p id="suErr" style="color:#ff4d7e; margin-top:12px; font-weight:500; height:20px"></p>
+    </form>
+  </div>
+</div>
+
+<div id="view-app" class="view-layer hidden app-layout">
+  
+  <!-- Sidebar lateral -->
+  <aside class="sidebar">
+    <div class="sb-header">
+      <a href="#" class="sb-logo" onclick="app.nav('feed')">
+        <svg viewBox="0 0 32 32"><rect x="1" y="1" width="30" height="30" rx="10" fill="url(#lg)"/><path d="M9.5 22V10l13 12V10" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        NEXU
+      </a>
+    </div>
+    
+    <nav class="sb-nav" id="catNav">
+      <!-- Injetado via JS -->
+    </nav>
+    
+    <div class="sb-user" onclick="app.nav('profile')">
+      <div class="avatar-sm" id="myAv">?</div>
+      <div class="user-info">
+        <b id="myName">Carregando...</b>
+        <span id="myUser">@...</span>
+      </div>
+    </div>
+  </aside>
+  
+  <!-- Conteúdo Principal -->
+  <main class="main-content">
+    
+    <!-- Tela do Feed (Galeria) -->
+    <div id="page-feed" class="page-layer">
+      <div class="topbar glass" style="margin:-24px -24px 24px -24px">
+        <h2 id="feedTitle" style="margin:0;font-family:var(--display);font-size:20px">Todos</h2>
+        <div class="search-box">
+          <svg class="i"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <input type="text" id="searchInput" placeholder="Buscar botões, loaders...">
+        </div>
+        <button class="btn" onclick="app.openEditor()">+ Novo Componente</button>
+      </div>
+      
+      <div class="grid" id="mainGrid"></div>
+    </div>
+    
+    <!-- Tela de Perfil -->
+    <div id="page-profile" class="page-layer hidden">
+      <div class="profile-header">
+        <div class="ph-top">
+          <button class="btn ghost" onclick="app.nav('feed')"><svg class="i"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Volte</button>
+          <div style="display:flex; gap:16px; align-items:center">
+            <div class="ph-stats">
+              <span><b id="pfCount">0</b> publicações</span>
+              <span><b id="pfLikes">0</b> likes</span>
+            </div>
+            <button class="btn ghost">Personalizar</button>
+          </div>
+        </div>
+        
+        <div class="avatar-huge" id="pfAv"></div>
+        <h2 class="ph-name" id="pfName">Nome</h2>
+        <div class="ph-handle">
+          <svg class="i" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          <span id="pfUser">@user</span>
+        </div>
+      </div>
+      
+      <div class="profile-tabs">
+        <button class="ptab active" onclick="app.setProfileTab('posts', this)">Postagens</button>
+        <button class="ptab" onclick="app.setProfileTab('favs', this)">Favoritos</button>
+      </div>
+      
+      <div class="grid" id="profileGrid"></div>
+      <div class="empty-state hidden" id="profileEmpty">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8M12 8v8"/></svg>
+        <p>Ainda não há publicações públicas</p>
+      </div>
+    </div>
+    
+  </main>
+</div>
+
+<!-- Modal Detalhe -->
+<dialog id="dlgView">
+  <div class="dlg glass">
+    <div class="dlg-head">
+      <div>
+        <h3 id="vdTitle" style="margin:0;font-family:var(--display);font-size:20px">Título</h3>
+        <span id="vdAuthor" style="font-size:13px;color:var(--muted)">por Autor</span>
+      </div>
+      <button class="btn ghost iconbtn" onclick="document.getElementById('dlgView').close()"><svg class="i"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <div class="dlg-body">
+      <div class="pane left">
+        <div class="stage">
+          <iframe id="vdFrame" sandbox="allow-scripts"></iframe>
+          <div class="bgs-ctrl" id="vdBgs">
+            <button data-bg="dark" style="background:#0a0a0a"></button>
+            <button data-bg="light" style="background:#eef0ff"></button>
+            <button data-bg="mesh" style="background:linear-gradient(135deg,#6b5cff,#ff5cb8)"></button>
+          </div>
+        </div>
+      </div>
+      <div class="pane">
+        <div class="code-area">
+          <div class="code-tabs" id="vdTabs">
+            <button class="active" data-tab="html">HTML</button>
+            <button data-tab="css">CSS</button>
+            <button data-tab="js">JS</button>
+          </div>
+          <pre id="vdCode"></pre>
+        </div>
+        <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:10px">
+          <button class="like-btn" id="vdLike" style="padding:10px 16px;background:rgba(255,255,255,.05);border-radius:12px;font-size:14px">
+            <svg class="i" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.3 2.7 4.5 6.4 4.5c2 0 3.6 1.1 5.6 3.3 2-2.2 3.6-3.3 5.6-3.3 3.7 0 5.5 3.8 4 7.3C19.5 16.4 12 21 12 21z"/></svg>
+            <span id="vdLikeN">Curtir</span>
+          </button>
+          <button class="btn ghost" onclick="app.copyCode()">Copiar Código</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<!-- Modal Editor -->
+<dialog id="dlgEdit">
+  <div class="dlg glass">
+    <div class="dlg-head">
+      <h3 style="margin:0;font-family:var(--display);font-size:20px">Novo Componente</h3>
+      <button class="btn ghost iconbtn" onclick="document.getElementById('dlgEdit').close()"><svg class="i"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <div class="dlg-body">
+      <div class="pane left">
+        <div class="stage">
+          <iframe id="edFrame" sandbox="allow-scripts"></iframe>
+          <div class="bgs-ctrl" id="edBgs">
+            <button data-bg="dark" style="background:#0a0a0a" aria-pressed="true"></button>
+            <button data-bg="light" style="background:#eef0ff"></button>
+            <button data-bg="mesh" style="background:linear-gradient(135deg,#6b5cff,#ff5cb8)"></button>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:10px">
+          <input type="text" id="edTitle" placeholder="Nome do componente (Ex: Botão Neon)" style="flex:1;padding:10px 14px;border-radius:12px;border:1px solid var(--glass-border);background:var(--field);font-size:14px">
+          <select id="edCat" style="padding:10px;border-radius:12px;border:1px solid var(--glass-border);background:var(--field)">
+            <!-- Opções via JS -->
+          </select>
+        </div>
+      </div>
+      <div class="pane">
+        <div class="code-area">
+          <div class="code-tabs" id="edTabs">
+            <button class="active" data-tab="html">HTML</button>
+            <button data-tab="css">CSS</button>
+            <button data-tab="js">JS</button>
+          </div>
+          <textarea id="edHtml" spellcheck="false" placeholder="<!-- HTML -->"></textarea>
+          <textarea id="edCss" class="hidden" spellcheck="false" placeholder="/* CSS */"></textarea>
+          <textarea id="edJs" class="hidden" spellcheck="false" placeholder="// JS (Opcional)"></textarea>
+        </div>
+        <div style="display:flex;justify-content:flex-end;margin-top:10px">
+          <button class="btn" onclick="app.publish()">Publicar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc, collection, onSnapshot, addDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+// Configurações
+const appId = typeof __app_id !== 'undefined' ? __app_id : 'nexu-app-v2';
+const firebaseConfig = {
+  apiKey: "AIzaSyCbxXcDoSmmvMlCGIAsyRV2AvxMBKxx-bE",
+  authDomain: "uinexu.firebaseapp.com",
+  projectId: "uinexu",
+  storageBucket: "uinexu.firebasestorage.app",
+  messagingSenderId: "378124421736",
+  appId: "1:378124421736:web:3d45eaee9c8fef58ca89dd"
+};
+
+const fApp = initializeApp(firebaseConfig);
+const db = getFirestore(fApp);
+const auth = getAuth(fApp);
+
+// Ícones da Sidebar
+const CAT_ICONS = {
+  'Todos': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+  'Botões': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="6" width="18" height="12" rx="6"/><path d="M9 12h6"/></svg>',
+  'Toggles': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="7" width="20" height="10" rx="5"/><circle cx="7" cy="12" r="3" fill="currentColor"/></svg>',
+  'Checkboxes': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="5" y="5" width="14" height="14" rx="3"/><path d="M9 12l2 2 4-4"/></svg>',
+  'Cards': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8 8h8M8 12h5"/></svg>',
+  'Loaders': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 4v2M12 18v2M4 12h2M18 12h2M6.34 6.34l1.42 1.42M16.24 16.24l1.42 1.42M6.34 17.66l1.42-1.42M16.24 7.76l1.42-1.42"/></svg>',
+  'Inputs': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="8" width="18" height="8" rx="2"/><path d="M6 12h1v1H6z" fill="currentColor" stroke="none"/></svg>',
+  'Formulários': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8"/></svg>',
+  'Outros': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4l16 16M4 20L20 4"/></svg>'
+};
+
+// Estado da Aplicação
+const state = {
+  user: null, profile: null,
+  components: [], likes: new Set(),
+  activeCat: 'Todos', searchQuery: '',
+  profileTab: 'posts', // 'posts' ou 'favs'
+  viewingComp: null, viewTab: 'html', viewBg: 'dark',
+  editTab: 'html', editBg: 'dark'
+};
+
+const BGS = {
+  dark: '#0a0a0a',
+  light: '#f5f5fa',
+  mesh: 'linear-gradient(135deg, #6b5cff, #ff5cb8, #1a1a4a)'
+};
+
+const app = window.app = {};
+
+// Utilidades
+const $ = s => document.querySelector(s);
+const esc = s => String(s||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const toast = msg => { const t=$('#toast'); t.textContent=msg; t.classList.add('on'); setTimeout(()=>t.classList.remove('on'), 3000); };
+const genAvatar = name => {
+  let h=0; for(let i=0; i<name.length; i++) h = Math.imul(31, h) + name.charCodeAt(i) | 0;
+  return `background: linear-gradient(135deg, hsl(${h%360} 80% 60%), hsl(${(h+40)%360} 80% 40%))`;
+};
+
+app.login = async () => {
+  try {
+    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+      await signInWithCustomToken(auth, __initial_auth_token);
+    } else {
+      await signInAnonymously(auth);
+    }
+    state.user = auth.currentUser;
+    await checkProfile();
+  } catch(e) { console.error(e); toast('Erro ao entrar.'); }
+};
+
+async function checkProfile() {
+  if (!state.user) return;
+  const ref = doc(db, 'artifacts', appId, 'public', 'data', 'profiles', state.user.uid);
+  const snap = await getDoc(ref);
+  if (snap.exists()) {
+    state.profile = snap.data();
+    finishLogin();
+  } else {
+    $('#view-auth').classList.add('hidden');
+    $('#view-setup').classList.remove('hidden');
+  }
+}
+
+app.saveProfile = async () => {
+  if (!state.user) return;
+  const username = $('#suUsername').value.trim().toLowerCase();
+  const name = $('#suName').value.trim();
+  const err = $('#suErr');
+  
+  // Verifica se username já existe
+  const unRef = doc(db, 'artifacts', appId, 'public', 'data', 'usernames', username);
+  const unSnap = await getDoc(unRef);
+  if (unSnap.exists() && unSnap.data().uid !== state.user.uid) {
+    err.textContent = 'Nome de usuário já em uso.'; return;
+  }
+  
+  err.textContent = 'Salvando...';
+  const profileData = { username, name, uid: state.user.uid, joined: Date.now() };
+  
+  await setDoc(unRef, { uid: state.user.uid });
+  await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'profiles', state.user.uid), profileData);
+  
+  state.profile = profileData;
+  finishLogin();
+};
+
+function finishLogin() {
+  $('#view-auth').classList.add('hidden');
+  $('#view-setup').classList.add('hidden');
+  $('#view-app').classList.remove('hidden');
+  
+  // Atualiza sidebar perfil
+  $('#myName').textContent = state.profile.name;
+  $('#myUser').textContent = '@' + state.profile.username;
+  const av = $('#myAv');
+  av.style.cssText = genAvatar(state.profile.username);
+  av.textContent = state.profile.name[0].toUpperCase();
+  
+  // Popula tela de Perfil
+  $('#pfName').textContent = state.profile.name;
+  $('#pfUser').textContent = '@' + state.profile.username;
+  const pfAv = $('#pfAv');
+  pfAv.style.cssText = genAvatar(state.profile.username);
+  pfAv.textContent = state.profile.name[0].toUpperCase();
+  
+  loadData();
+}
+
+function loadData() {
+  if (!state.user) return;
+  
+  // Escuta Componentes (Todos, memória lida com filtro)
+  const compRef = collection(db, 'artifacts', appId, 'public', 'data', 'components');
+  onSnapshot(compRef, snap => {
+    state.components = snap.docs.map(d => ({id: d.id, ...d.data()})).sort((a,b) => b.created - a.created);
+    renderFeed();
+    if (!$('#page-profile').classList.contains('hidden')) renderProfile();
+  }, e => console.error(e));
+  
+  // Escuta Likes Privados do Usuário
+  const likesRef = collection(db, 'artifacts', appId, 'users', state.user.uid, 'likes');
+  onSnapshot(likesRef, snap => {
+    state.likes = new Set(snap.docs.map(d => d.id));
+    renderFeed();
+    if (!$('#page-profile').classList.contains('hidden')) renderProfile();
+    updateViewModalLike();
+  }, e => console.error(e));
+}
+
+function initNav() {
+  const nav = $('#catNav');
+  nav.innerHTML = Object.keys(CAT_ICONS).map(cat => 
+    `<a href="#" class="sb-item ${cat==='Todos'?'active':''}" data-cat="${cat}">${CAT_ICONS[cat]} ${cat}</a>`
+  ).join('');
+  
+  nav.addEventListener('click', e => {
+    const item = e.target.closest('.sb-item');
+    if (!item) return;
+    document.querySelectorAll('.sb-item').forEach(el => el.classList.remove('active'));
+    item.classList.add('active');
+    state.activeCat = item.dataset.cat;
+    $('#feedTitle').textContent = state.activeCat;
+    app.nav('feed');
+    renderFeed();
+  });
+  
+  $('#searchInput').addEventListener('input', e => {
+    state.searchQuery = e.target.value.toLowerCase();
+    renderFeed();
+  });
+  
+  // Opções de categorias no Editor
+  $('#edCat').innerHTML = Object.keys(CAT_ICONS).filter(c=>c!=='Todos').map(c => `<option value="${c}">${c}</option>`).join('');
+}
+
+app.nav = page => {
+  $('#page-feed').classList.toggle('hidden', page !== 'feed');
+  $('#page-profile').classList.toggle('hidden', page !== 'profile');
+  if(page === 'profile') renderProfile();
+};
+
+function getIframeDoc(c, bg) {
+  const js = (c.js||'').replace(/<\/script/gi, '<\\/script');
+  return `<!doctype html><html><head><style>body{margin:0;display:grid;place-items:center;min-height:100vh;background:${BGS[bg]};font-family:system-ui} *{box-sizing:border-box} ${c.css||''}</style></head><body>${c.html||''}${js?'<script>'+js+'<\\/script>':''}</body></html>`;
+}
+
+function buildCard(c) {
+  const liked = state.likes.has(c.id);
+  const el = document.createElement('article');
+  el.className = 'card';
+  el.innerHTML = `
+    <div class="thumb">
+      <iframe srcdoc="${esc(getIframeDoc(c, c.bg))}" sandbox="allow-scripts"></iframe>
+      <button class="code-btn" onclick="app.openView('${c.id}')"><svg class="i" viewBox="0 0 24 24"><path d="M8 8l-5 4 5 4M16 8l5 4-5 4M14 5l-4 14"/></svg> Código</button>
+    </div>
+    <div class="meta">
+      <h4 class="title">${esc(c.title)}</h4>
+      <div class="row">
+        <div class="avatar-sm" style="width:20px;height:20px;font-size:10px;${genAvatar(c.authorUsername)}">${c.authorName[0].toUpperCase()}</div>
+        <span class="author-name">${esc(c.authorName)}</span>
+        <button class="like-btn" aria-pressed="${liked}" onclick="app.toggleLike('${c.id}', ${c.likes||0})">
+          <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.3 2.7 4.5 6.4 4.5c2 0 3.6 1.1 5.6 3.3 2-2.2 3.6-3.3 5.6-3.3 3.7 0 5.5 3.8 4 7.3C19.5 16.4 12 21 12 21z"/></svg>
+          ${c.likes || 0}
+        </button>
+      </div>
+    </div>
+  `;
+  return el;
+}
+
+function renderFeed() {
+  const grid = $('#mainGrid');
+  grid.innerHTML = '';
+  let list = state.components;
+  
+  if (state.activeCat !== 'Todos') list = list.filter(c => c.cat === state.activeCat);
+  if (state.searchQuery) list = list.filter(c => c.title.toLowerCase().includes(state.searchQuery) || c.authorName.toLowerCase().includes(state.searchQuery));
+  
+  if (list.length === 0) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted)">Nenhum componente encontrado.</div>';
+    return;
+  }
+  list.forEach(c => grid.appendChild(buildCard(c)));
+}
+
+app.setProfileTab = (tab, btn) => {
+  document.querySelectorAll('.ptab').forEach(el => el.classList.remove('active'));
+  btn.classList.add('active');
+  state.profileTab = tab;
+  renderProfile();
+};
+
+function renderProfile() {
+  const grid = $('#profileGrid');
+  const empty = $('#profileEmpty');
+  grid.innerHTML = '';
+  
+  const myPosts = state.components.filter(c => c.authorUid === state.user.uid);
+  $('#pfCount').textContent = myPosts.length;
+  
+  let totalLikes = 0;
+  myPosts.forEach(c => totalLikes += (c.likes || 0));
+  $('#pfLikes').textContent = totalLikes;
+  
+  let list = [];
+  if (state.profileTab === 'posts') {
+    list = myPosts;
+  } else {
+    list = state.components.filter(c => state.likes.has(c.id));
+  }
+  
+  if (list.length === 0) {
+    grid.classList.add('hidden');
+    empty.classList.remove('hidden');
+  } else {
+    grid.classList.remove('hidden');
+    empty.classList.add('hidden');
+    list.forEach(c => grid.appendChild(buildCard(c)));
+  }
+}
+
+app.toggleLike = async (compId, currentLikes) => {
+  if (!state.user) return;
+  const isLiked = state.likes.has(compId);
+  
+  // Atualiza privado
+  const pRef = doc(db, 'artifacts', appId, 'users', state.user.uid, 'likes', compId);
+  if (isLiked) {
+    await doc(db, 'artifacts', appId, 'users', state.user.uid, 'likes', compId); // mock delete for iframe restrictions if needed, usually we'd use deleteDoc
+    import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js").then(({deleteDoc}) => deleteDoc(pRef));
+  } else {
+    await setDoc(pRef, { t: Date.now() });
+  }
+  
+  // Atualiza público (simplificado)
+  const cRef = doc(db, 'artifacts', appId, 'public', 'data', 'components', compId);
+  await updateDoc(cRef, { likes: isLiked ? Math.max(0, currentLikes - 1) : currentLikes + 1 });
+};
+
+// Detalhe Modal
+app.openView = id => {
+  const c = state.components.find(x => x.id === id);
+  if (!c) return;
+  state.viewingComp = c;
+  state.viewBg = c.bg || 'dark';
+  
+  $('#vdTitle').textContent = c.title;
+  $('#vdAuthor').textContent = 'por ' + c.authorName;
+  
+  // Set tab
+  app.setViewTab('html');
+  
+  const dlg = document.getElementById('dlgView');
+  dlg.showModal();
+  
+  // Correção do Bug de Preview: aguardar modal abrir para setar srcdoc
+  requestAnimationFrame(() => {
+    app.updateViewFrame();
+  });
+};
+
+app.updateViewFrame = () => {
+  if (!state.viewingComp) return;
+  document.querySelectorAll('#vdBgs button').forEach(b => b.setAttribute('aria-pressed', b.dataset.bg === state.viewBg));
+  $('#vdFrame').srcdoc = getIframeDoc(state.viewingComp, state.viewBg);
+};
+
+$('#vdBgs').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  state.viewBg = b.dataset.bg;
+  app.updateViewFrame();
+});
+
+app.setViewTab = tab => {
+  state.viewTab = tab;
+  document.querySelectorAll('#vdTabs button').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  $('#vdCode').textContent = state.viewingComp[tab] || '';
+};
+$('#vdTabs').addEventListener('click', e => {
+  if (e.target.tagName==='BUTTON') app.setViewTab(e.target.dataset.tab);
+});
+
+function updateViewModalLike() {
+  if (!state.viewingComp || !document.getElementById('dlgView').open) return;
+  const c = state.components.find(x => x.id === state.viewingComp.id);
+  if(!c) return;
+  const liked = state.likes.has(c.id);
+  const btn = $('#vdLike');
+  btn.setAttribute('aria-pressed', liked);
+  $('#vdLikeN').textContent = liked ? 'Curtiu' : 'Curtir';
+  btn.querySelector('svg').style.fill = liked ? '#ff3d8b' : 'none';
+  btn.querySelector('svg').style.stroke = liked ? '#ff3d8b' : 'currentColor';
+}
+
+app.copyCode = () => {
+  const code = $('#vdCode').textContent;
+  navigator.clipboard.writeText(code).then(()=>toast('Código copiado!')).catch(()=>toast('Erro ao copiar.'));
+};
+
+let edTimer;
+app.openEditor = () => {
+  $('#edTitle').value = '';
+  $('#edHtml').value = '<button class="meu-btn">Olá</button>';
+  $('#edCss').value = '.meu-btn { padding: 10px 20px; border-radius: 8px; background: #8a7dff; color: white; border: none; font-weight: bold; cursor: pointer; }';
+  $('#edJs').value = '';
+  state.editBg = 'dark';
+  app.setEditTab('html');
+  
+  const dlg = document.getElementById('dlgEdit');
+  dlg.showModal();
+  requestAnimationFrame(app.updateEditFrame);
+};
+
+app.updateEditFrame = () => {
+  const c = { html: $('#edHtml').value, css: $('#edCss').value, js: $('#edJs').value };
+  document.querySelectorAll('#edBgs button').forEach(b => b.setAttribute('aria-pressed', b.dataset.bg === state.editBg));
+  $('#edFrame').srcdoc = getIframeDoc(c, state.editBg);
+};
+
+['edHtml', 'edCss', 'edJs'].forEach(id => {
+  $(`#${id}`).addEventListener('input', () => {
+    clearTimeout(edTimer);
+    edTimer = setTimeout(app.updateEditFrame, 300);
+  });
+  $(`#${id}`).addEventListener('keydown', function(e) {
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      const start = this.selectionStart, end = this.selectionEnd;
+      this.value = this.value.substring(0, start) + "  " + this.value.substring(end);
+      this.selectionStart = this.selectionEnd = start + 2;
+      clearTimeout(edTimer); edTimer = setTimeout(app.updateEditFrame, 300);
+    }
+  });
+});
+
+$('#edBgs').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  state.editBg = b.dataset.bg;
+  app.updateEditFrame();
+});
+
+app.setEditTab = tab => {
+  state.editTab = tab;
+  document.querySelectorAll('#edTabs button').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  ['html', 'css', 'js'].forEach(t => $(`#ed${t.charAt(0).toUpperCase()+t.slice(1)}`).classList.toggle('hidden', t !== tab));
+};
+$('#edTabs').addEventListener('click', e => {
+  if (e.target.tagName==='BUTTON') app.setEditTab(e.target.dataset.tab);
+});
+
+app.publish = async () => {
+  if (!state.user || !state.profile) return;
+  const title = $('#edTitle').value.trim();
+  if (title.length < 3) return toast('Insira um título válido.');
+  
+  const compData = {
+    title,
+    cat: $('#edCat').value,
+    bg: state.editBg,
+    html: $('#edHtml').value,
+    css: $('#edCss').value,
+    js: $('#edJs').value,
+    authorUid: state.user.uid,
+    authorName: state.profile.name,
+    authorUsername: state.profile.username,
+    created: Date.now(),
+    likes: 0
+  };
+  
+  try {
+    const coll = collection(db, 'artifacts', appId, 'public', 'data', 'components');
+    await addDoc(coll, compData);
+    document.getElementById('dlgEdit').close();
+    toast('Publicado com sucesso!');
+  } catch(e) { console.error(e); toast('Erro ao publicar.'); }
+};
+
+// Init
+initNav();
+</script>
+</body>
+</html>

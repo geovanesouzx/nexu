@@ -879,8 +879,9 @@ import{getFirestore,collection,doc,getDoc,getDocs,setDoc,addDoc,updateDoc,delete
 /* ===== CONFIGURAÇÃO =====
    ADMIN_EMAILS: o e-mail do administrador. Só ele acessa /adm (login por e-mail e senha) e só ele
    passa pelas regras do Firestore (arquivo firestore.rules).
-   >>> TROQUE PELO SEU E-MAIL e use o MESMO e-mail no firestore.rules. <<< */
-const ADMIN_EMAILS=['admin@seudominio.com'];
+   >>> TROQUE PELO SEU E-MAIL e use o MESMO e-mail (minúsculo) no firestore.rules. <<<
+   Se a lista ficar vazia, a moderação fica desligada (tudo vai direto para "Publicados") e /adm fica indisponível. */
+const ADMIN_EMAILS=['SEU_EMAIL_AQUI@gmail.com'];
 const ADMINS=ADMIN_EMAILS.map(e=>String(e).toLowerCase());
 const MOD=ADMINS.length>0;
 
@@ -1358,7 +1359,7 @@ function renderCount(){
   const n=state.items.length;
   if(!n){el.textContent='Nenhum componente publicado ainda.';return}
   const au={};state.items.forEach(c=>{au[c.authorId]=1});const a=Object.keys(au).length;
-  el.textContent=n+(n===1?' componente de ')+a+(a===1?' criador':' criadores');
+  el.textContent=n+(n===1?' componente de ':' componentes de ')+a+(a===1?' criador':' criadores');
 }
 let feat=null;
 function renderFeature(){

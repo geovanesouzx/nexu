@@ -32,6 +32,7 @@
   --ok:#2fd29a;--warn:#f0b13a;--bad:#ff6b83;
   --shadow:0 18px 40px -22px rgba(0,0,0,.8);--code-bg:#0c0c16;--code-text:#e5e6ff;
 }
+
 *,*::before,*::after{box-sizing:border-box}
 html{background:var(--bg);scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 var(--body);-webkit-font-smoothing:antialiased;min-height:100vh;min-height:100dvh}
@@ -177,20 +178,24 @@ h1{margin:0;font-family:var(--display);font-weight:700;font-size:clamp(2rem,3.6v
 .empty p{margin:0 0 18px;color:var(--muted)}
 footer{padding:0 0 40px;text-align:center;color:var(--muted);font-size:14px}
 
-.pcard{background:var(--surface);border:1px solid var(--line);border-radius:26px;padding:10px;margin-bottom:22px}
-.banner{height:160px;border-radius:18px}
-.pbody{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start;padding:0 18px 10px}
-.pbody .av.big{width:104px;height:104px;font-size:42px;margin-top:-52px;border:4px solid var(--surface);position:relative}
-.pinfo{flex:1;min-width:220px;padding-top:12px}
-.pinfo h2{margin:0;font-family:var(--display);font-size:30px;line-height:1.1;letter-spacing:-.02em;overflow-wrap:anywhere}
-.pinfo p{margin:8px 0 0;color:var(--muted);max-width:62ch;white-space:pre-wrap;overflow-wrap:anywhere}
-.pmeta{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:10px;font-size:13px;color:var(--muted)}
-.pmeta a{color:var(--accent);font-weight:600;text-decoration:none}
-.pacts{display:flex;gap:10px;flex-wrap:wrap;padding-top:12px}
-.stats{display:flex;gap:10px;flex-wrap:wrap;padding:6px 18px 12px}
-.stat{padding:10px 20px;border-radius:14px;border:1px solid var(--line);background:var(--surface2);min-width:112px}
-.stat b{display:block;font-family:var(--display);font-size:24px;line-height:1.2}
-.stat span{font-size:12px;color:var(--muted)}
+.pcard{background:var(--surface);border:1px solid var(--line);border-radius:26px;padding:0 0 16px;margin-bottom:22px;overflow:hidden;position:relative}
+.banner{height:180px;width:100%;background-size:cover;background-position:center;position:relative}
+.banner::after{content:"";position:absolute;inset:0;background:linear-gradient(to top, var(--surface) 0%, transparent 60%);}
+.pbody{display:flex;flex-direction:column;padding:0 24px;position:relative;margin-top:-60px;z-index:2}
+.p-top-row{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:16px}
+.av.big{width:120px;height:120px;font-size:42px;border:6px solid var(--surface);box-shadow:var(--shadow);border-radius:50%}
+.pacts{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.pinfo{margin-bottom:16px}
+.pinfo h2{margin:0;font-family:var(--display);font-size:28px;line-height:1.1;letter-spacing:-.02em;display:flex;align-items:center}
+.pinfo .uname{margin:4px 0 12px;font-family:var(--mono);font-size:14px;color:var(--muted)}
+.pinfo p{margin:0 0 12px;color:var(--text);font-size:15px;max-width:62ch;white-space:pre-wrap;overflow-wrap:anywhere}
+.pmeta{display:flex;flex-wrap:wrap;gap:12px 20px;font-size:13.5px;color:var(--muted)}
+.pmeta a{color:var(--accent);font-weight:600;text-decoration:none;display:flex;align-items:center;gap:4px}
+.stats{display:flex;gap:24px;flex-wrap:wrap;padding-top:4px;border-top:1px solid var(--line);margin-top:10px}
+.stat{display:flex;align-items:center;gap:6px;padding:12px 0;background:transparent;border:none;min-width:0}
+.stat b{font-family:var(--display);font-size:20px;color:var(--text)}
+.stat span{font-size:14px;color:var(--muted)}
+
 .ptabs{display:flex;gap:4px;overflow-x:auto;margin-bottom:20px;border-bottom:1px solid var(--line);scrollbar-width:none}
 .ptabs::-webkit-scrollbar{display:none}
 .ptabs button{position:relative;display:flex;align-items:center;gap:8px;padding:11px 16px;border:0;background:none;font-weight:600;font-size:14.5px;color:var(--muted);white-space:nowrap}
@@ -284,6 +289,8 @@ form.colform{display:flex;flex-direction:column;gap:14px}
 .swatches button{width:42px;height:42px;border-radius:50%;border:2px solid var(--line);padding:0}
 .swatches button[aria-pressed="true"]{outline:2px solid var(--accent);outline-offset:3px}
 .cnt{font-size:12px;color:var(--muted);text-align:right;margin-top:-2px}
+.u-prefix{position:absolute;left:14px;top:11px;color:var(--muted);font-weight:600}
+.input-un{padding-left:32px !important}
 
 .type-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-top:20px}
 .type-card{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:116px;border-radius:16px;border:1px solid var(--line);background:var(--surface2);font-weight:600;font-size:14px;padding:12px 8px;transition:all .15s}
@@ -341,6 +348,12 @@ textarea.plain:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--tint)
   .ef-inputs{min-width:0;width:100%}
   .pbar.ef .pend{margin-left:0;width:100%}
   .pbar.ef .pend .btn{flex:1}
+  
+  .pbody{margin-top:-50px;padding:0 16px}
+  .av.big{width:90px;height:90px;font-size:32px;border-width:4px}
+  .p-top-row{flex-direction:column;align-items:flex-start;gap:12px}
+  .stats{width:100%;justify-content:space-between;border-top:0;margin-top:0}
+  .pinfo h2{font-size:24px}
 }
 @media (max-width:620px){
   dialog[open]{inset:auto 0 0 0;margin:0;width:100%;max-width:100%}
@@ -360,7 +373,6 @@ textarea.plain:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--tint)
 }
 @media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;scroll-behavior:auto!important}}
 
-/* LIQUID GLASS */
 :root{
   --bg:#e4eaff;--text:#15173d;--muted:#4a4f88;--accent:#5b4bff;--accent2:#e0368f;--tint:rgba(91,75,255,.12);
   --surface:rgba(255,255,255,.6);--surface2:rgba(255,255,255,.5);--line:rgba(255,255,255,.85);
@@ -402,7 +414,7 @@ body{isolation:isolate}
 @keyframes d3{to{transform:translate(10vmax,-8vmax) scale(1.08)}}
 @media (prefers-reduced-motion:reduce){.aurora i{animation:none}}
 
-.side,.topbar,.pcard,.empty,.editor-header,.editor-footer,.toast,.panel{
+.side,.topbar,.empty,.editor-header,.editor-footer,.toast,.panel,.pcard{
   background:linear-gradient(135deg,var(--glass-a),var(--glass-b));
   -webkit-backdrop-filter:blur(26px) saturate(185%);backdrop-filter:blur(26px) saturate(185%);
   border-color:var(--line);
@@ -424,7 +436,6 @@ body{isolation:isolate}
 .btn.ghost{box-shadow:inset 0 1px 1px var(--glass-hi),0 8px 22px -14px var(--gshadow)}
 .btn.sm,.iconbtn{border-radius:999px}
 .chip,.tabs button{border-radius:99px}
-.pbody .av.big{border-color:var(--bg)}
 .badge{background:var(--dlg-a);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
 .code-wrapper,pre{background:var(--code-bg)}
 
@@ -439,7 +450,6 @@ body{isolation:isolate}
   background:linear-gradient(140deg,rgba(255,255,255,.95),rgba(255,255,255,0) 32%,rgba(255,255,255,0) 66%,rgba(255,255,255,.65));
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.75}
 .card{border-radius:28px;padding:10px}.feature{border-radius:34px;padding:12px}
-.pcard{position:relative}
 .side::after{border-radius:0;opacity:.35}
 .card:hover{box-shadow:none;border-color:transparent}
 .thumb,.feature .stage,.stage{border:1px solid var(--line)}
@@ -528,28 +538,31 @@ dialog::after{border-radius:26px}
         <div class="grid" id="lGrid" data-size="mix"></div>
       </section>
 
-      <!-- Perfil -->
+      <!-- Perfil (Estilo TikTok/Instagram) -->
       <section id="s_profile" aria-label="Perfil" hidden>
         <button class="btn ghost sm back" id="pBack" type="button"><svg class="i i-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Voltar</button>
         <div class="pcard">
           <div class="banner" id="pBanner"></div>
           <div class="pbody">
-            <span class="av big" id="pAv"></span>
+            <div class="p-top-row">
+                <span class="av big" id="pAv"></span>
+                <div class="stats">
+                    <div class="stat"><b id="pStatPosts">0</b><span>Publicações</span></div>
+                    <div class="stat"><b id="pStatFollowers">0</b><span>Seguidores</span></div>
+                    <div class="stat"><b id="pStatFollowing">0</b><span>Seguindo</span></div>
+                </div>
+            </div>
+            
             <div class="pinfo">
               <h2 id="pName"></h2>
+              <div class="uname" id="pUsername"></div>
               <p id="pBio"></p>
               <div class="pmeta"><a id="pLink" target="_blank" rel="noopener noreferrer nofollow" hidden></a><span id="pSince"></span></div>
             </div>
-            <div class="pacts" id="pActs" hidden>
-              <button class="btn sm" id="pNew" type="button"><svg class="i i-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Nova publicação</button>
-              <button class="btn ghost sm" id="pEdit" type="button">Editar perfil</button>
-              <!-- O botão de verificar será injetado pelo JS quando aplicável -->
+
+            <div class="pacts" id="pActs">
+              <!-- Botões Injetados pelo JS dependendo se é o dono ou outro user -->
             </div>
-          </div>
-          <div class="stats">
-            <div class="stat"><b id="pStatPosts">0</b><span>Publicados</span></div>
-            <div class="stat"><b id="pStatLikes">0</b><span>Curtidas recebidas</span></div>
-            <div class="stat"><b id="pStatViews">0</b><span>Visualizações</span></div>
           </div>
         </div>
         <div class="ptabs" id="pTabs" role="tablist" hidden></div>
@@ -600,7 +613,7 @@ dialog::after{border-radius:26px}
           <button class="btn danger sm" id="vDel" type="button" hidden>Excluir</button>
         </div>
 
-        <!-- Seção de interações: Chat Admin (se for o dono) e Comentários da Comunidade -->
+        <!-- Seção de interações -->
         <div class="rgrid" id="vSocialSection">
           <div class="panel" id="adminChatPanel" hidden>
             <h3>Conversa com a Equipe</h3>
@@ -748,7 +761,13 @@ dialog::after{border-radius:26px}
         </div>
         <input id="epFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
       </div>
-      <label class="f">Nome<input id="epName" maxlength="40" autocomplete="name"></label>
+      <label class="f">Nome de Exibição<input id="epName" maxlength="40" autocomplete="name"></label>
+      <label class="f">Nome de Usuário Único
+        <div style="position:relative">
+            <span class="u-prefix">@</span>
+            <input id="epUsername" class="input-un" maxlength="24" autocomplete="off" placeholder="seu_usuario">
+        </div>
+      </label>
       <label class="f">Bio<textarea id="epBio" class="plain" maxlength="160" placeholder="Conte um pouco sobre você e o que gosta de criar"></textarea></label>
       <div class="cnt" id="epCnt">0/160</div>
       <label class="f">Site ou link<input id="epLink" type="url" maxlength="200" placeholder="https://meusite.com"></label>
@@ -843,7 +862,7 @@ const state={view:'explore',q:'',cat:'Todos',tag:'',sort:'pop',
   likes:[],likeCount:{},mine:{},
   views:[],viewCount:{},seen:{},
   saves:{},saveT:{},saveCount:{},
-  comments:[], feedback:[], // Novos arrays de interação
+  comments:[], feedback:[], 
   mineAll:[],
   pview:null,pitems:[],ptab:'published',profileOwn:false,
   current:null,tab:'html',bg:'dark',editing:null,signupName:null};
@@ -866,6 +885,7 @@ function ago(t){
 const statusOf=c=>c.status||'published';
 const stLabel=c=>{const s=statusOf(c);return s==='rejected'&&c.rejectKind==='changes'?'Ajustes pedidos':STATUS[s]};
 const byNew=(a,b)=>(b.createdAt||0)-(a.createdAt||0);
+const verOf = c => (c.updatedAt || c.createdAt || 0) + '_' + c.status; // CORREÇÃO: Necessário para a renderização dos cards (o erro que ocultava as informações).
 
 function findItem(id){
   const lists=[state.items,state.mineAll,state.pitems];
@@ -874,8 +894,13 @@ function findItem(id){
 
 // Funções de usuário e nome
 const uName=(uid,fb)=>{const u=state.users[uid];return(u&&u.displayName)||fb||'Anônimo'};
+const uHandle=(uid)=>{const u=state.users[uid]; return u && u.username ? '@'+u.username : ''};
 const isVerified=uid=>{const u=state.users[uid];return !!(u&&u.verified)};
-const nameHTML=(uid,fb)=>esc(uName(uid,fb))+(isVerified(uid)?SEAL:'');
+const nameHTML=(uid,fb)=>{
+    const n = esc(uName(uid,fb));
+    const un = uHandle(uid);
+    return `<span style="display:flex;align-items:center;gap:6px">${n}${isVerified(uid)?SEAL:''}${un ? `<span style="font-size:0.85em;color:var(--muted);font-weight:normal;font-family:var(--mono)">${esc(un)}</span>`:''}</span>`;
+};
 const authorOf=c=>uName(c.authorId,c.authorName);
 
 const likeCount=c=>state.likeCount[c.id]||0;
@@ -1376,7 +1401,6 @@ function openView(c,silent){
   listenToComponentDocs(c.id);
 }
 
-// Lida com chats de admin e comentários publicos
 function listenToComponentDocs(cid) {
   if (unsubComments) unsubComments();
   if (unsubFeedback) unsubFeedback();
@@ -1414,7 +1438,7 @@ function renderComments() {
 
   const renderC = (c, isReply) => {
     const u = state.users[c.u] || {};
-    const name = c.name || 'Anônimo';
+    const name = u.displayName || c.name || 'Anônimo';
     const av = avHTML(name, u);
     const nHTML = nameHTML(c.u, name);
     const liked = state.user && c.likes && c.likes.includes(state.user.uid);
@@ -1608,12 +1632,16 @@ $('#aForgot').addEventListener('click',()=>{
 });
 
 let myVerReq = null;
+function generateUsername(name) {
+    return String(name || 'user').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9_]/g,'').slice(0, 15) + Math.floor(Math.random()*10000);
+}
 function ensureProfile(u){
   const ref=doc(db,'users',u.uid);
   return getDoc(ref).then(s=>{
     if(s.exists())return s.data();
     const nm=(state.signupName||u.displayName||(u.email||'').split('@')[0]||'Criador').trim().slice(0,40)||'Criador';
-    const data={displayName:nm,bio:'',link:'',photo:okPhoto(u.photoURL)?u.photoURL:'',banner:Math.floor(Math.random()*BANNERS.length),createdAt:Date.now()};
+    const un = generateUsername(nm);
+    const data={displayName:nm, username: un, bio:'',link:'',photo:okPhoto(u.photoURL)?u.photoURL:'',banner:Math.floor(Math.random()*BANNERS.length),createdAt:Date.now(), followers:[], following:[]};
     return setDoc(ref,data).then(()=>data);
   }).then(p=>{state.signupName=null;return p});
 }
@@ -1662,7 +1690,7 @@ onAuthStateChanged(auth,u=>{
   }
   startUserListeners(u);
   const tok=u.uid;
-  ensureProfile(u).then(p=>p,()=>({displayName:u.displayName||(u.email||'').split('@')[0]||'Criador',bio:'',link:'',photo:okPhoto(u.photoURL)?u.photoURL:'',banner:0,createdAt:Date.now()})).then(p=>{
+  ensureProfile(u).then(p=>p,()=>({displayName:u.displayName||(u.email||'').split('@')[0]||'Criador', username: generateUsername(u.displayName), bio:'',link:'',photo:okPhoto(u.photoURL)?u.photoURL:'',banner:0,createdAt:Date.now()})).then(p=>{
     if(!state.user||state.user.uid!==tok)return;
     state.profile=p;state.users[u.uid]=p;paintAuth();renderAll();
   });
@@ -1692,6 +1720,34 @@ function openProfile(uid,tab,silent){
   if(state.users[uid])go();
   else getDoc(doc(db,'users',uid)).then(s=>{state.users[uid]=s.exists()?s.data():false;go()},()=>toast('Não foi possível abrir o perfil.'));
 }
+
+function toggleFollow(uid) {
+    if(!requireAuth('Faça login para seguir.')) return;
+    const myUid = state.user.uid;
+    if(myUid === uid) return;
+    
+    const u = state.users[uid];
+    const me = state.profile;
+    if(!u || !me) return;
+
+    const isFollowing = me.following && me.following.includes(uid);
+    
+    // Optimistic UI Update
+    if(isFollowing) {
+        me.following = me.following.filter(x => x !== uid);
+        u.followers = u.followers.filter(x => x !== myUid);
+    } else {
+        me.following = me.following || [];
+        me.following.push(uid);
+        u.followers = u.followers || [];
+        u.followers.push(myUid);
+    }
+    renderProfile();
+
+    updateDoc(doc(db, 'users', myUid), { following: isFollowing ? arrayRemove(uid) : arrayUnion(uid) });
+    updateDoc(doc(db, 'users', uid), { followers: isFollowing ? arrayRemove(myUid) : arrayUnion(myUid) });
+}
+
 function emptyProfile(own,tab){
   const T={
     published:[own?'Você ainda não publicou nada':'Nenhuma publicação ainda',own?'Seus componentes aprovados aparecem aqui.':'Quando este criador publicar, os componentes aparecem aqui.'],
@@ -1705,54 +1761,76 @@ function renderProfile(){
   const uid=state.pview;if(!uid||state.view!=='profile')return;
   const u=state.users[uid]||{},own=!!state.user&&state.user.uid===uid,name=u.displayName||'Criador';
   state.profileOwn=own;
+  
   const av=$('#pAv');av.dataset.sz='';setAv(av,uid,name);
   $('#pBanner').style.background=BANNERS[u.banner]||BANNERS[0];
   $('#pName').innerHTML=nameHTML(uid,name);
+  $('#pUsername').textContent = uHandle(uid);
+  
   const bio=$('#pBio');
   if(u.bio){bio.textContent=u.bio;bio.hidden=false}
   else if(own){bio.textContent='Adicione uma bio para se apresentar à comunidade.';bio.hidden=false}
   else bio.hidden=true;
+  
   const l=safeUrl(u.link),a=$('#pLink');
   if(l){a.href=l;a.textContent=l.replace(/^https?:\/\//i,'').replace(/\/$/,'');a.hidden=false}else a.hidden=true;
+  
   $('#pSince').textContent=u.createdAt?'Na NEXU desde '+new Date(u.createdAt).toLocaleDateString('pt-BR',{month:'long',year:'numeric'}):'';
-  $('#pActs').hidden=!own;
+  
+  const acts = $('#pActs');
+  acts.innerHTML = '';
   
   if(own) {
-    let vBtn = $('#pVerifyBtn');
-    if(!vBtn) {
-        vBtn = document.createElement('button');
-        vBtn.id = 'pVerifyBtn';
-        vBtn.type = 'button';
-        vBtn.className = 'btn ghost sm';
-        $('#pActs').appendChild(vBtn);
-        vBtn.addEventListener('click', () => {
-            if(u.verified) { toast('Você já é verificado pela NEXU!'); return; }
-            if(myVerReq && myVerReq.status === 'pending') { toast('Seu pedido já está em análise.'); return; }
-            $('#vryLink').value = u.link || '';
-            $('#vryMsg').value = '';
-            $('#vryErr').textContent = '';
-            verifyDlg.showModal();
-            pushLayer('verify');
-            syncLock();
-        });
-    }
+    acts.innerHTML = `
+        <button class="btn sm" id="pNew" type="button"><svg class="i i-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Nova publicação</button>
+        <button class="btn ghost sm" id="pEdit" type="button">Editar perfil</button>
+    `;
+    
+    let vBtn = document.createElement('button');
+    vBtn.type = 'button';
+    vBtn.className = 'btn ghost sm';
+    acts.appendChild(vBtn);
+    
+    vBtn.addEventListener('click', () => {
+        if(u.verified) { toast('Você já é verificado pela NEXU!'); return; }
+        if(myVerReq && myVerReq.status === 'pending') { toast('Seu pedido já está em análise.'); return; }
+        $('#vryLink').value = u.link || '';
+        $('#vryMsg').value = '';
+        $('#vryErr').textContent = '';
+        verifyDlg.showModal();
+        pushLayer('verify');
+        syncLock();
+    });
+    
     if(u.verified) { vBtn.hidden = true; }
     else if(myVerReq && myVerReq.status === 'pending') {
         vBtn.textContent = 'Verificação em análise';
         vBtn.disabled = true;
-        vBtn.hidden = false;
     } else {
         vBtn.textContent = 'Pedir Verificação';
         vBtn.disabled = false;
-        vBtn.hidden = false;
     }
+
+    $('#pNew').addEventListener('click',openTypeSelect);
+    $('#pEdit').addEventListener('click',openEditProfile);
+
+  } else {
+      const isFollowing = state.profile && state.profile.following && state.profile.following.includes(uid);
+      const followBtn = document.createElement('button');
+      followBtn.className = isFollowing ? 'btn ghost sm' : 'btn sm';
+      followBtn.textContent = isFollowing ? 'Deixar de seguir' : 'Seguir';
+      followBtn.addEventListener('click', () => toggleFollow(uid));
+      acts.appendChild(followBtn);
   }
 
   const all=own?state.mineAll:state.pitems;
   const by={published:[],review:[],rejected:[],draft:[]};
   all.forEach(c=>{(by[statusOf(c)]||by.published).push(c)});
-  let likes=0,views=0;by.published.forEach(c=>{likes+=likeCount(c);views+=viewCount(c)});
-  $('#pStatPosts').textContent=by.published.length;$('#pStatLikes').textContent=likes;$('#pStatViews').textContent=views;
+  
+  $('#pStatPosts').textContent=by.published.length;
+  $('#pStatFollowers').textContent = u.followers ? u.followers.length : 0;
+  $('#pStatFollowing').textContent = u.following ? u.following.length : 0;
+  
   const tabs=$('#pTabs');tabs.hidden=!own;
   const TL=[['published','Publicados'],['review','Em análise'],['rejected','Rejeitados'],['draft','Rascunhos']];
   if(own)tabs.innerHTML=TL.map(t=>'<button type="button" role="tab" data-ptab="'+t[0]+'" aria-selected="'+(state.ptab===t[0])+'">'+t[1]+'<em>'+by[t[0]].length+'</em></button>').join('');
@@ -1762,15 +1840,18 @@ function renderProfile(){
 }
 $('#pTabs').addEventListener('click',e=>{const b=e.target.closest('[data-ptab]');if(!b)return;state.ptab=b.dataset.ptab;renderProfile();fixUrl()});
 $('#pBack').addEventListener('click',goBack);
-$('#pNew').addEventListener('click',openTypeSelect);
 
 let editPhoto='',editBanner=0;
 const paintEditAv=()=>{const e=$('#epAv');e.dataset.sz='';setAv(e,state.user?state.user.uid:'',$('#epName').value.trim()||myName(),{photo:editPhoto})};
 const paintBanners=()=>$$('#epBanners button').forEach((b,i)=>b.setAttribute('aria-pressed',i===editBanner));
+
 function openEditProfile(){
   if(!state.user)return;
   const p=state.profile||{};
-  $('#epName').value=p.displayName||myName();$('#epBio').value=p.bio||'';$('#epLink').value=p.link||'';
+  $('#epName').value=p.displayName||myName();
+  $('#epUsername').value=p.username||'';
+  $('#epBio').value=p.bio||'';
+  $('#epLink').value=p.link||'';
   editPhoto=okPhoto(p.photo)?p.photo:'';editBanner=typeof p.banner==='number'?p.banner:0;
   $('#epErr').textContent='';$('#epCnt').textContent=$('#epBio').value.length+'/160';
   paintEditAv();paintBanners();editDlg.showModal();pushLayer('edit');syncLock();
@@ -1778,6 +1859,9 @@ function openEditProfile(){
 $('#epBanners').innerHTML=BANNERS.map((g,i)=>'<button type="button" aria-label="Cor '+(i+1)+'" aria-pressed="false" style="background:'+g+'"></button>').join('');
 $('#epBanners').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;editBanner=[].indexOf.call($('#epBanners').children,b);paintBanners()});
 $('#epName').addEventListener('input',paintEditAv);
+$('#epUsername').addEventListener('input', function() {
+    this.value = this.value.toLowerCase().replace(/[^a-z0-9_]/g, '');
+});
 $('#epBio').addEventListener('input',function(){$('#epCnt').textContent=this.value.length+'/160'});
 $('#epPick').addEventListener('click',()=>$('#epFile').click());
 $('#epRemove').addEventListener('click',()=>{editPhoto='';paintEditAv()});
@@ -1796,14 +1880,38 @@ $('#epFile').addEventListener('change',function(){
 });
 $('#epCancel').addEventListener('click',()=>editDlg.close());
 $('#epClose').addEventListener('click',()=>editDlg.close());
-$('#editForm').addEventListener('submit',e=>{
+
+$('#editForm').addEventListener('submit', async (e) => {
   e.preventDefault();if(!state.user)return;
-  const err=$('#epErr'),name=$('#epName').value.trim(),bio=$('#epBio').value.trim();let link=$('#epLink').value.trim();
+  const err=$('#epErr'), name=$('#epName').value.trim(), un=$('#epUsername').value.trim(), bio=$('#epBio').value.trim();
+  let link=$('#epLink').value.trim();
+  
   if(name.length<2||name.length>40){err.textContent='O nome precisa ter entre 2 e 40 caracteres.';$('#epName').focus();return}
+  if(un.length<3||un.length>24){err.textContent='O usuário precisa ter entre 3 e 24 caracteres.';$('#epUsername').focus();return}
   if(bio.length>160){err.textContent='A bio pode ter no máximo 160 caracteres.';return}
   if(link){if(!/^https?:\/\//i.test(link))link='https://'+link;if(!safeUrl(link)){err.textContent='Digite um link válido (ex.: https://meusite.com).';$('#epLink').focus();return}}
-  const data={displayName:name,bio:bio,link:link,photo:editPhoto,banner:editBanner},uid=state.user.uid,old=myName();
+  
   const btn=$('#epSave');btn.disabled=true;err.textContent='';
+  const uid=state.user.uid,old=myName();
+  
+  // Verify Username uniqueness
+  if(un !== (state.profile.username || '')) {
+      try {
+          const snap = await getDocs(query(collection(db, 'users'), where('username', '==', un)));
+          if(!snap.empty) {
+              err.textContent = 'Este nome de usuário já está em uso.';
+              btn.disabled = false;
+              return;
+          }
+      } catch (e) {
+          err.textContent = 'Erro ao verificar nome de usuário.';
+          btn.disabled = false;
+          return;
+      }
+  }
+
+  const data={displayName:name, username:un, bio:bio, link:link, photo:editPhoto, banner:editBanner};
+  
   setDoc(doc(db,'users',uid),data,{merge:true}).then(()=>{
     state.profile=Object.assign({createdAt:Date.now()},state.profile,data);state.users[uid]=state.profile;
     editDlg.close();paintAuth();renderAll();paintAuthors();toast('Perfil atualizado');
@@ -1811,6 +1919,7 @@ $('#editForm').addEventListener('submit',e=>{
     if(old!==name)renamePosts(uid,name);
   },()=>{err.textContent='Não foi possível salvar. Verifique sua conexão e as regras do Firestore.'}).then(()=>{btn.disabled=false});
 });
+
 function renamePosts(uid,name){
   getDocs(query(collection(db,'components'),where('authorId','==',uid))).then(s=>{
     const b=writeBatch(db);let n=0;
@@ -1818,7 +1927,6 @@ function renamePosts(uid,name){
     return n?b.commit():null;
   }).catch(()=>{});
 }
-$('#pEdit').addEventListener('click',openEditProfile);
 
 // Submit pedido de verificação
 $('#verifyForm').addEventListener('submit', e => {

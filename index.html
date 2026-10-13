@@ -871,9 +871,10 @@ dialog::after{border-radius:26px}
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script type="module">
-import{initializeApp}from"https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-import{getAuth,onAuthStateChanged,signOut,GoogleAuthProvider,GithubAuthProvider,signInWithPopup,signInWithRedirect,getRedirectResult,createUserWithEmailAndPassword,signInWithEmailAndPassword,sendPasswordResetEmail,updateProfile}from"https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-import{getFirestore,collection,doc,getDoc,getDocs,setDoc,addDoc,updateDoc,deleteDoc,onSnapshot,query,where,limit,writeBatch}from"https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+import{initializeApp}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import{getAnalytics,isSupported}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-analytics.js";
+import{getAuth,onAuthStateChanged,signOut,GoogleAuthProvider,GithubAuthProvider,signInWithPopup,createUserWithEmailAndPassword,signInWithEmailAndPassword,sendPasswordResetEmail,updateProfile}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import{getFirestore,collection,doc,getDoc,getDocs,setDoc,addDoc,updateDoc,deleteDoc,onSnapshot,query,where,limit,writeBatch}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
 /* ===== CONFIGURAÇÃO =====
    ADMIN_EMAILS: o e-mail do administrador. Só ele acessa /adm (login por e-mail e senha) e só ele
@@ -893,6 +894,7 @@ const firebaseConfig={
   measurementId:"G-BXT95FWHES"
 };
 const app=initializeApp(firebaseConfig);
+try{isSupported().then(ok=>{if(ok)getAnalytics(app)}).catch(()=>{})}catch(e){}
 const auth=getAuth(app),db=getFirestore(app);
 
 const $=s=>document.querySelector(s),$$=s=>[].slice.call(document.querySelectorAll(s));
@@ -1786,21 +1788,8 @@ $('#oauth').addEventListener('click',e=>{
   const b=e.target.closest('[data-p]');if(!b)return;
   const p=b.dataset.p==='google'?new GoogleAuthProvider():new GithubAuthProvider();
   $('#aErr').textContent='';busy(true);
-  signInWithPopup(auth,p).then(()=>authDlg.close()).catch(er=>{
-    if(er&&er.code==='auth/popup-blocked'){
-      $('#aErr').textContent='Redirecionando para o login...';
-      signInWithRedirect(auth,p);
-    }else{
-      authErr(er);busy(false);
-    }
-  });
+  signInWithPopup(auth,p).then(()=>authDlg.close(),authErr).then(()=>busy(false));
 });
-
-/* Captura erros caso o usuário volte de um redirecionamento falho */
-getRedirectResult(auth).catch(er=>{
-  if(er) toast('Erro no login: ' + (AUTH_ERR[er.code] || 'Tente novamente.'));
-});
-
 $('#authForm').addEventListener('submit',e=>{
   e.preventDefault();
   const err=$('#aErr'),email=$('#aEmail').value.trim(),pass=$('#aPass').value;err.textContent='';
